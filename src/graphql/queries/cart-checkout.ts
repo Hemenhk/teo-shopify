@@ -1,7 +1,7 @@
 import { client } from "@/shopify-client";
 
-const CartCheckout = `
-query CartCheckout($id: ID = "") {
+const cartCheckout = `
+query Cart($id: ID!) {
   cart(id: $id) {
     checkoutUrl
     cost {
@@ -21,6 +21,34 @@ query CartCheckout($id: ID = "") {
         }
         id
         quantity
+        merchandise {
+          ... on ProductVariant {
+            id
+            price {
+              amount
+              currencyCode
+            }
+            sku
+            unitPrice {
+              amount
+              currencyCode
+            }
+            image {
+              altText
+              transformedSrc(preferredContentType: PNG)
+            }
+            product {
+              handle
+              id
+              title
+              vendor
+              featuredImage {
+                transformedSrc(preferredContentType: PNG)
+                id
+              }
+            }
+          }
+        }
       }
     }
     totalQuantity
@@ -30,9 +58,10 @@ query CartCheckout($id: ID = "") {
 
 export const getCart = async (id: string) => {
   try {
-    const res = await client.request(CartCheckout, {
+    const res = await client.request(cartCheckout, {
       variables: { id },
     });
+    console.log("getCart", res);
     return res;
   } catch (error) {
     console.log(error);

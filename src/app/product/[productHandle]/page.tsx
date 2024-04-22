@@ -17,9 +17,9 @@ export default function ProductPage({
 }) {
   const { productHandle } = params;
 
-  // const [checkoutId, setCheckoutId] = useState<string | null>(null);
 
-  const checkoutId = localStorage.getItem("checkout_id");
+  const checkoutId = localStorage.getItem("checkout_id") as string;
+
 
   const {
     data: productData,
@@ -58,7 +58,7 @@ export default function ProductPage({
   };
 
   return (
-    <main className="flex flex-col lg:flex-row justify-center items-center gap-8 h-full md:h-screen pt-28">
+    <main className="flex flex-col lg:flex-row justify-center items-center gap-8 h-full pt-28">
       <div className="flex justify-center md:w-2/4 h-full">
         <TheProductImages product={product} />
       </div>
