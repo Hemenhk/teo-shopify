@@ -2,7 +2,7 @@
 import TheProductImages from "@/components/product/TheProductImages";
 import TheProductPrice from "@/components/product/TheProductPrice";
 import { getProductByHandle } from "@/graphql/queries/product-query";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -17,9 +17,8 @@ export default function ProductPage({
 }) {
   const { productHandle } = params;
 
-
   const checkoutId = localStorage.getItem("checkout_id") as string;
-
+  const queryClient = useQueryClient();
 
   const {
     data: productData,
@@ -33,6 +32,9 @@ export default function ProductPage({
     mutationKey: ["add"],
     mutationFn: async () =>
       await addLineItemToCart(checkoutId, productVariantId, 1),
+    onSuccess: (data) => {
+      queryClient.refetchQueries({ queryKey: ["cartItems"] });
+    },
   });
 
   if (isLoading) {
