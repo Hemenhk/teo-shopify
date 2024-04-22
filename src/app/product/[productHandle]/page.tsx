@@ -5,11 +5,10 @@ import { getProductByHandle } from "@/graphql/product-query";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-import {AddToCartButton} from "@shopify/hydrogen-react"
+import { AddToCartButton } from "@shopify/hydrogen-react";
 import { Button } from "@/components/ui/button";
 import TheProductDesc from "@/components/product/TheProductDesc";
 import QuantitySelector from "@/components/product/QuantitySelector";
-
 
 export default function ProductPage({
   params,
@@ -58,9 +57,10 @@ export default function ProductPage({
 
         <TheProductPrice product={product} />
         <QuantitySelector />
-        <Button className="uppercase tracking-widest font-normal mt-8 w-[400px] rounded-none bg-black">Add to Cart</Button>
+        <Button className="uppercase tracking-widest font-normal mt-8 w-[400px] rounded-none bg-black">
+          Add to Cart
+        </Button>
         <TheProductDesc product={product} />
-        
       </div>
     </main>
   );
