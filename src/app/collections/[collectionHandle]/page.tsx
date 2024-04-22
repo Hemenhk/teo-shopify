@@ -1,5 +1,5 @@
 "use client";
-import { getCollectionByHandle } from "@/graphql/collections";
+import { getCollectionByHandle } from "@/graphql/queries/collections";
 import { useQuery } from "@tanstack/react-query";
 import TheCollection from "@/components/collections/TheCollection";
 

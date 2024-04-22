@@ -1,14 +1,14 @@
 "use client";
 import TheProductImages from "@/components/product/TheProductImages";
 import TheProductPrice from "@/components/product/TheProductPrice";
-import { getProductByHandle } from "@/graphql/product-query";
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import { getProductByHandle } from "@/graphql/queries/product-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
 
-import { AddToCartButton } from "@shopify/hydrogen-react";
 import { Button } from "@/components/ui/button";
 import TheProductDesc from "@/components/product/TheProductDesc";
 import QuantitySelector from "@/components/product/QuantitySelector";
+import { addLineItemToCart } from "@/graphql/mutations/add-to-cart";
 
 export default function ProductPage({
   params,
@@ -17,6 +17,10 @@ export default function ProductPage({
 }) {
   const { productHandle } = params;
 
+  // const [checkoutId, setCheckoutId] = useState<string | null>(null);
+
+  const checkoutId = localStorage.getItem("checkout_id");
+
   const {
     data: productData,
     isError,
@@ -24,6 +28,11 @@ export default function ProductPage({
   } = useQuery({
     queryKey: ["product"],
     queryFn: () => getProductByHandle(productHandle),
+  });
+  const { mutateAsync: addLineItem } = useMutation({
+    mutationKey: ["add"],
+    mutationFn: async () =>
+      await addLineItemToCart(checkoutId, productVariantId, 1),
   });
 
   if (isLoading) {
@@ -39,25 +48,34 @@ export default function ProductPage({
   if (!product) {
     return <div>Product not found.</div>;
   }
+  const productVariantId = product.variants.nodes[0].id;
+
   console.log("product", product);
-  console.log("product", productData?.errors);
+
+  const addToCartHandler = () => {
+    addLineItem();
+    console.log("okay", addLineItem);
+  };
 
   return (
-    <main className="flex justify-center items-center gap-8 h-screen pt-28">
+    <main className="flex flex-col lg:flex-row justify-center items-center gap-8 h-full md:h-screen pt-28">
       <div className="flex justify-center md:w-2/4 h-full">
         <TheProductImages product={product} />
       </div>
-      <div className="flex flex-col md:w-[500px] h-full">
+      <div className="flex flex-col text-center md:text-left md:w-[500px] h-full">
         <p className="text-xs uppercase tracking-wide text-gray-500">
           {product.vendor}
         </p>
-        <h2 className="text-2xl tracking-wide uppercase font-light w-4/5 py-6">
+        <h2 className="text-2xl text-center md:text-left tracking-wide uppercase font-light px-4 md:px-0 py-6">
           {product.title}
         </h2>
 
         <TheProductPrice product={product} />
         <QuantitySelector />
-        <Button className="uppercase tracking-widest font-normal mt-8 w-[400px] rounded-none bg-black">
+        <Button
+          onClick={addToCartHandler}
+          className="uppercase tracking-widest font-normal mt-8 w-[330px] md:w-[400px] mx-auto md:mx-0 rounded-none bg-black"
+        >
           Add to Cart
         </Button>
         <TheProductDesc product={product} />

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/providers/tanstack-provider";
 import TheHeader from "@/components/header/TheHeader";
+import { CartProvider } from "@/context/cartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ReactQueryProvider>
-          <TheHeader />
-          {children}
+          <CartProvider>
+            <TheHeader />
+            {children}
+          </CartProvider>
         </ReactQueryProvider>
       </body>
     </html>

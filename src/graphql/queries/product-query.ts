@@ -6,6 +6,12 @@ query ProductByHandle($handle: String = "") {
     
     description
     descriptionHtml
+    variants(first: 10) {
+      nodes {
+        availableForSale
+        id
+      }
+    }
     images(first: 4) {
       nodes {
         altText

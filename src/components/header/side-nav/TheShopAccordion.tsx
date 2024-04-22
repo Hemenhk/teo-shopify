@@ -1,6 +1,6 @@
 "use client";
 
-import { getShopLinks } from "@/graphql/shop-links";
+import { getShopLinks } from "@/graphql/queries/shop-links"; 
 import { useQuery } from "@tanstack/react-query";
 
 import {

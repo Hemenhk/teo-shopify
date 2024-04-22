@@ -1,5 +1,5 @@
 "use client";
-import { getFeaturedCollection } from "@/graphql/featured-collection-query";
+import { getFeaturedCollection } from "@/graphql/queries/featured-collection-query"; 
 import { useQuery } from "@tanstack/react-query";
 import TheCollection from "../collections/TheCollection";
 

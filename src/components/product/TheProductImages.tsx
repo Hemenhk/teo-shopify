@@ -55,10 +55,12 @@ export default function TheProductImages({ product }: ProductImage) {
 
   return (
     <div className="flex flex-col">
-      <Carousel className="w-[600px]" setApi={setApi}>
+      <Carousel className="w-[300px] md:w-[600px]" setApi={setApi}>
         <CarouselContent>{mappedImages}</CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <div className="hidden md:flex">
+          <CarouselPrevious />
+          <CarouselNext />
+        </div>
       </Carousel>
       <div className="flex gap justify-center pt-5 text-center text-sm text-muted-foreground">
         {circles.map((circle) => (
