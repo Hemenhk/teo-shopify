@@ -1,7 +1,7 @@
 import { client } from "@/shopify-client";
 
 const productQuery = `
-query MyQuery($handle: String = "") {
+query ProductByHandle($handle: String = "") {
   productByHandle(handle: $handle) {
     
     description
@@ -21,6 +21,7 @@ query MyQuery($handle: String = "") {
     }
     vendor
     title
+    
   }
 }
 `;
