@@ -1,14 +1,10 @@
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Link from "next/link";
 import { MenuIcon } from "lucide-react";
 import TheShopAccordion from "./TheShopAccordion";
+import ThePagesLinks from "./ThePagesLinks";
 
 export default function TheSideNav() {
-
   return (
     <Sheet>
       <SheetTrigger>
@@ -21,14 +17,10 @@ export default function TheSideNav() {
               Home
             </Link>
           </li>
-          <li>
-            <TheShopAccordion />
-          </li>
-          <li className="pb-3 border-b mr-8">
-            <Link href="/" className="text-lg uppercase tracking-wider">
-              Home
-            </Link>
-          </li>
+
+          <TheShopAccordion />
+
+          <ThePagesLinks />
         </ul>
       </SheetContent>
     </Sheet>

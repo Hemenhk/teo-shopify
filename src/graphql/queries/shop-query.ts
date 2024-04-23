@@ -1,21 +1,73 @@
 import { client } from "@/shopify-client";
-import axios from "axios";
 
 const productQuery = `
-query getShopDetails{
-    shop {
-      name
-      primaryDomain{
-        host
-        url
+query ShopQuery {
+  shop {
+    brand {
+      logo {
+        id
+        image {
+          altText
+          id
+          url(transform: {preferredContentType: PNG})
+        }
       }
-      paymentSettings{
-        currencyCode
-        acceptedCardBrands
-        enabledPresentmentCurrencies
+      coverImage {
+        image {
+          altText
+          id
+          url(transform: {preferredContentType: PNG})
+        }
       }
     }
+    paymentSettings {
+      acceptedCardBrands
+      countryCode
+      currencyCode
+    }
+    privacyPolicy {
+      body
+      handle
+      id
+      title
+      url
+    }
+    refundPolicy {
+      body
+      handle
+      id
+      title
+      url
+    }
+    shippingPolicy {
+      body
+      handle
+      id
+      title
+      url
+    }
+    subscriptionPolicy {
+      body
+      handle
+      id
+      title
+      url
+    }
+    termsOfService {
+      body
+      handle
+      id
+      title
+      url
+    }
+    name
+    id
+    primaryDomain {
+      host
+      url
+    }
   }
+}
 `;
 
 export const getShopInfo = async () => {

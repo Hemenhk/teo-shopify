@@ -16,7 +16,7 @@ export default function TheRemoveCartItem({
   const { mutateAsync: removeLineItemMutation } = useMutation({
     mutationKey: ["cartItems"],
     mutationFn: () => removeLineItem(checkoutId, lineItemId),
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.refetchQueries({ queryKey: ["cartItems"] });
     },
   });
@@ -26,7 +26,7 @@ export default function TheRemoveCartItem({
     console.log("line item removed");
   };
   return (
-    <Button onClick={removeLineItemHandler}>
+    <Button onClick={removeLineItemHandler} className="bg-transparent hover:bg-transparent text-black">
       <Trash2 size={20} />
     </Button>
   );

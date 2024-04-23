@@ -1,17 +1,18 @@
-"use client"
 import TheFeaturedCollection from "@/components/featured-collection/TheFeaturedCollection";
-import { useCart } from "@/context/cartContext";
+import { getShopInfo } from "@/graphql/queries/shop-query";
 
-
-export default function Home() {
-  
-  const {cart} = useCart()
-
-  console.log("cart is fine ", cart)
+export default async function Home() {
+  const res = await getShopInfo();
+  const homeImage = res?.data.shop.brand.coverImage.image;
+  console.log("home image", homeImage);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex h-full flex-col items-center justify-between">
+        <img className="h-[80vh] w-screen" src={homeImage.url} alt={homeImage.altText || "cover image"} />
+      <div className="py-16">
+
       <TheFeaturedCollection />
+      </div>
     </main>
   );
 }
