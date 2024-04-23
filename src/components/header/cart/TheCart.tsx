@@ -31,7 +31,7 @@ export default function TheCart() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <ShoppingBag />;
   }
 
   if (isError || !cartData?.data) {

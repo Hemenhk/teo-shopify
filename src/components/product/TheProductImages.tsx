@@ -18,12 +18,6 @@ export default function TheProductImages({ product }: ProductImage) {
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
 
-  if (!product || !product.images || !product.images.nodes) {
-    return null;
-  }
-  const productImages: any[] = product.images.nodes;
-  console.log("images", productImages);
-
   useEffect(() => {
     if (!api) {
       return;
@@ -36,6 +30,12 @@ export default function TheProductImages({ product }: ProductImage) {
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
+
+  if (!product || !product.images || !product.images.nodes) {
+    return null;
+  }
+  const productImages: any[] = product.images.nodes;
+  console.log("images", productImages);
 
   const mappedImages =
     productImages &&
