@@ -18,6 +18,10 @@ query Cart($id: ID!) {
             amount
             currencyCode
           }
+          totalAmount {
+            amount
+            currencyCode
+          }
         }
         id
         quantity
