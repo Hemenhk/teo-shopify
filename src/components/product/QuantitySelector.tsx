@@ -1,14 +1,31 @@
 import React from "react";
 import { Minus, Plus } from "lucide-react";
 
-export default function QuantitySelector() {
+type QuantityType = {
+  count: number;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+};
+
+export default function QuantitySelector({ count, setCount }: QuantityType) {
+  const minusHandler = async () => {
+    if (count > 1) {
+      const newCount = count - 1;
+      setCount(newCount);
+    }
+  };
+
+  const plusHandler = async () => {
+    const newCount = count + 1;
+    setCount(newCount);
+  };
+
   return (
-    <div className="flex flex-col gap-3 pt-6">
+    <div className="flex flex-col items-center lg:items-start gap-3 pt-6">
       <p className="text-sm">Quantity:</p>
       <div className="flex items-center justify-between gap-4 border border-[#dbdbdb] rounded px-[20px] py-[6px]  w-[125px]">
-        <Minus size={15} cursor={"pointer"} />
-        <p>1</p>
-        <Plus size={15} cursor={"pointer"} />
+        <Minus onClick={minusHandler} size={15} cursor={"pointer"} />
+        <p>{count}</p>
+        <Plus onClick={plusHandler} size={15} cursor={"pointer"} />
       </div>
     </div>
   );

@@ -3,13 +3,13 @@ import { client } from "@/shopify-client";
 const productQuery = `
 query ProductByHandle($handle: String = "") {
   productByHandle(handle: $handle) {
-    
     description
     descriptionHtml
     variants(first: 10) {
       nodes {
         availableForSale
         id
+        title
       }
     }
     images(first: 4) {
@@ -27,7 +27,6 @@ query ProductByHandle($handle: String = "") {
     }
     vendor
     title
-    
   }
 }
 `;

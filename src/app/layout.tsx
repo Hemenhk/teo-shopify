@@ -4,6 +4,7 @@ import "./globals.css";
 import ReactQueryProvider from "@/providers/tanstack-provider";
 import TheHeader from "@/components/header/TheHeader";
 import { CartProvider } from "@/context/cartContext";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <CartProvider>
             <TheHeader />
             {children}
+            <Toaster />
           </CartProvider>
         </ReactQueryProvider>
       </body>

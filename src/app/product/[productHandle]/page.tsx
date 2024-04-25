@@ -3,12 +3,14 @@ import TheProductImages from "@/components/product/TheProductImages";
 import TheProductPrice from "@/components/product/TheProductPrice";
 import { getProductByHandle } from "@/graphql/queries/product-query";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import TheProductDesc from "@/components/product/TheProductDesc";
 import QuantitySelector from "@/components/product/QuantitySelector";
 import { addLineItemToCart } from "@/graphql/mutations/add-to-cart";
+import { useToast } from "@/components/ui/use-toast";
+import TheProductVariants from "@/components/product/TheProductVariants";
 
 export default function ProductPage({
   params,
@@ -16,6 +18,9 @@ export default function ProductPage({
   params: { productHandle: string };
 }) {
   const { productHandle } = params;
+  const { toast, dismiss } = useToast();
+  const [count, setCount] = useState(1);
+  const [selectedVariantId, setSelectedVariantId] = useState("");
 
   const checkoutId = localStorage.getItem("checkout_id") as string;
   const queryClient = useQueryClient();
@@ -31,8 +36,8 @@ export default function ProductPage({
   const { mutateAsync: addLineItem } = useMutation({
     mutationKey: ["add"],
     mutationFn: async () =>
-      await addLineItemToCart(checkoutId, productVariantId, 1),
-    onSuccess: (data) => {
+      await addLineItemToCart(checkoutId, productVariantId, count),
+    onSuccess: () => {
       queryClient.refetchQueries({ queryKey: ["cartItems"] });
     },
   });
@@ -53,9 +58,18 @@ export default function ProductPage({
   const productVariantId = product.variants.nodes[0].id;
 
   console.log("product", product);
+  console.log("product", productData.errors);
 
   const addToCartHandler = () => {
     addLineItem();
+    toast({
+      title: `x${count} - ${product.title}`,
+      description: `${product.variants.nodes[0].title} added to the cart`,
+    });
+
+    setTimeout(() => {
+      dismiss();
+    }, 1500);
     console.log("okay", addLineItem);
   };
 
@@ -73,13 +87,23 @@ export default function ProductPage({
         </h2>
 
         <TheProductPrice product={product} />
-        <QuantitySelector />
-        <Button
+        <TheProductVariants
+          variants={product.variants.nodes}
+          selectedVariantId={selectedVariantId}
+          onVariantSelect={(variantId: any) => {
+            setSelectedVariantId(variantId);
+          }}
+        />
+        <QuantitySelector count={count} setCount={setCount} />
+        <div className="flex justify-center lg:justify-start">
+            <Button
           onClick={addToCartHandler}
           className="uppercase tracking-widest font-normal mt-8 w-[330px] md:w-[400px] mx-auto md:mx-0 rounded-none bg-black"
         >
           Add to Cart
         </Button>
+        </div>
+      
         <TheProductDesc product={product} />
       </div>
     </main>

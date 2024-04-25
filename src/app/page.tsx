@@ -8,7 +8,7 @@ export default async function Home() {
 
   return (
     <main className="flex h-full flex-col items-center justify-between">
-        <img className="h-[80vh] w-screen" src={homeImage.url} alt={homeImage.altText || "cover image"} />
+        <img className="h-[80vh] w-screen brightness-75" src={homeImage.url} alt={homeImage.altText || "cover image"}/>
       <div className="py-16">
 
       <TheFeaturedCollection />
