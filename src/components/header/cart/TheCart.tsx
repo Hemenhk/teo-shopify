@@ -59,7 +59,7 @@ export default function TheCart() {
         </SheetHeader>
         <TheCartItems cart={cart} />
         <SheetFooter className="absolute bottom-16 w-full">
-          <TheCartTotalBtn cost={cost} checkoutUrl={cart.checkoutUrl} />
+          <TheCartTotalBtn cost={cost} />
         </SheetFooter>
       </SheetContent>
     </Sheet>

@@ -4,21 +4,22 @@ import React from "react";
 
 type CartTotal = {
   cost: any;
-  checkoutUrl: any;
 };
 
-export default function TheCartTotalBtn({ cost, checkoutUrl }: CartTotal) {
+export default function TheCartTotalBtn({ cost }: CartTotal) {
   const router = useRouter();
 
+  const eur = cost.currencyCode === "EUR" && "€"
+
   const checkoutUrlHandler = () => {
-    router.push(checkoutUrl);
+    router.push("/cart");
   };
   return (
     <Button
       onClick={checkoutUrlHandler}
       className="flex justify-center tracking-widest font-light w-full mx-3 rounded-none bg-black"
     >
-      Total: {cost.amount} {cost.currencyCode}
+      Total: {eur}{cost.amount} 
     </Button>
   );
 }

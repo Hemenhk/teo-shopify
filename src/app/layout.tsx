@@ -5,6 +5,8 @@ import ReactQueryProvider from "@/providers/tanstack-provider";
 import TheHeader from "@/components/header/TheHeader";
 import { CartProvider } from "@/context/cartContext";
 import { Toaster } from "@/components/ui/toaster";
+import TheAnnouncement from "@/components/announcement/TheAnnouncement";
+import TheFooter from "@/components/footer/TheFooter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +25,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReactQueryProvider>
           <CartProvider>
+            <TheAnnouncement />
             <TheHeader />
             {children}
+            <TheFooter />
             <Toaster />
           </CartProvider>
         </ReactQueryProvider>
