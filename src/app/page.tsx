@@ -1,4 +1,5 @@
 import TheFeaturedCollection from "@/components/featured-collection/TheFeaturedCollection";
+import ThePerks from "@/components/homepage/ThePerks";
 import { getShopInfo } from "@/graphql/queries/shop-query";
 
 export default async function Home() {
@@ -8,10 +9,14 @@ export default async function Home() {
 
   return (
     <main className="flex h-full flex-col items-center justify-between">
-        <img className="h-[80vh] w-screen brightness-75" src={homeImage.url} alt={homeImage.altText || "cover image"}/>
+      <img
+        className="h-[80vh] w-screen brightness-75"
+        src={homeImage.url}
+        alt={homeImage.altText || "cover image"}
+      />
+      <ThePerks />
       <div className="py-16">
-
-      <TheFeaturedCollection />
+        <TheFeaturedCollection />
       </div>
     </main>
   );

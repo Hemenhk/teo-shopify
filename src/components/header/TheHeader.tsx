@@ -19,7 +19,7 @@ export default function TheHeader() {
   console.log("logo", logo);
 
   return (
-    <header className="flex justify-between items-center p-8 px-12 shadow-md">
+    <header className="flex justify-between items-center p-3 px-12 shadow-md">
       <TheSideNav />
       <Link href={"/"}>
         <Image

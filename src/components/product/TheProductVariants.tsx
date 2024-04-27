@@ -33,7 +33,9 @@ export default function TheProductVariants({
       : "";
 
   return (
-    <div className="flex justify-center lg:justify-start gap-5 pt-5">
+    <div className="flex flex-col items-center lg:items-start gap-5 pt-5">
+      {variants.length > 1 ?  <p className="text-sm">Size:</p> : ""}
+      
       <div className="flex flex-wrap gap-2">{selectVariants}</div>
     </div>
   );

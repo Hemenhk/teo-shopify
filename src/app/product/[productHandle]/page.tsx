@@ -74,8 +74,8 @@ export default function ProductPage({
   };
 
   return (
-    <main className="flex flex-col lg:flex-row justify-center items-center gap-8 h-full lg:h-screen pt-28">
-      <div className="flex justify-center md:w-2/4 h-full">
+    <main className="flex flex-col lg:flex-row justify-center gap-8 h-full pt-28">
+      <div className="flex  md:w-2/4 h-full">
         <TheProductImages product={product} />
       </div>
       <div className="flex flex-col text-center md:text-left md:w-[500px] h-full">

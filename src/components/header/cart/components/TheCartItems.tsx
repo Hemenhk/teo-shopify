@@ -4,8 +4,10 @@ import Image from "next/image";
 
 import TheRemoveCartItem from "./TheRemoveCartItem";
 import TheCartQuantity from "./TheCartQuantity";
+import { useCheckout } from "@/context/checkoutContext";
 
-export default function TheCartItems({ cart }: { cart: any }) {
+export default function TheCartItems() {
+  const { cart } = useCheckout();
   const mappedCartLineItems =
     cart &&
     cart.lines.nodes.map((lineItem: any) => {

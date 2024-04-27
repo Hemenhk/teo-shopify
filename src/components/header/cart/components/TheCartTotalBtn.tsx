@@ -1,15 +1,14 @@
 import { Button } from "@/components/ui/button";
+import { useCheckout } from "@/context/checkoutContext";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-type CartTotal = {
-  cost: any;
-};
-
-export default function TheCartTotalBtn({ cost }: CartTotal) {
+export default function TheCartTotalBtn() {
   const router = useRouter();
+  const { cart } = useCheckout();
+  const cost =cart && cart.cost;
 
-  const eur = cost.currencyCode === "EUR" && "€"
+  const eur = cost.currencyCode === "EUR" && "€";
 
   const checkoutUrlHandler = () => {
     router.push("/cart");
@@ -19,7 +18,8 @@ export default function TheCartTotalBtn({ cost }: CartTotal) {
       onClick={checkoutUrlHandler}
       className="flex justify-center tracking-widest font-light w-full mx-3 rounded-none bg-black"
     >
-      Total: {eur}{cost.amount} 
+      Total: {eur}
+      {cost.amount}
     </Button>
   );
 }

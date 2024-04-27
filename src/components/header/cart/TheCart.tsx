@@ -1,6 +1,5 @@
 "use client";
-import { getCart } from "@/graphql/queries/cart-checkout";
-import { useQuery } from "@tanstack/react-query";
+
 import {
   Sheet,
   SheetContent,
@@ -14,40 +13,24 @@ import { ShoppingBag } from "lucide-react";
 import TheCartItems from "./components/TheCartItems";
 import TheCartTotalBtn from "./components/TheCartTotalBtn";
 import { Badge } from "@/components/ui/badge";
+import { useCheckout } from "@/context/checkoutContext";
 
 export default function TheCart() {
-  const checkoutId = localStorage.getItem("checkout_id") || "";
-  console.log(checkoutId);
-  const {
-    data: cartData,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["cartItems"],
-    queryFn: () => getCart(checkoutId),
-  });
+  const { cart } = useCheckout();
 
-  if (!checkoutId) {
-    return <div>No checkout ID found.</div>;
+  if (!cart) {
+    return <p>No cart</p>;
   }
 
-  if (isLoading) {
-    return <ShoppingBag />;
-  }
+  console.log("cartData", cart);
 
-  if (isError || !cartData?.data) {
-    return <div>Error fetching cart data.</div>;
-  }
-  console.log("cartData", cartData?.data.cart);
-  const cart = cartData?.data.cart;
-  const cost = cart.cost.totalAmount;
   return (
     <Sheet>
       <SheetTrigger>
         <div className="relative">
-          <ShoppingBag size={30}/>
+          <ShoppingBag size={30} />
           <Badge className="bg-red-800 hover:bg-red-800 size-5 rounded-full text-xs flex justify-center items-center absolute top-0 right-0 -mt-1.5 -mr-1.5">
-            {cart.totalQuantity}
+            {cart && cart?.totalQuantity}
           </Badge>
         </div>
       </SheetTrigger>
@@ -57,9 +40,9 @@ export default function TheCart() {
             Cart
           </SheetTitle>
         </SheetHeader>
-        <TheCartItems cart={cart} />
+        <TheCartItems />
         <SheetFooter className="absolute bottom-16 w-full">
-          <TheCartTotalBtn cost={cost} />
+          <TheCartTotalBtn />
         </SheetFooter>
       </SheetContent>
     </Sheet>
