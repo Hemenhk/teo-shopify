@@ -1,0 +1,46 @@
+import { getAdminValues, updateAdminValues } from "@/axios/adminValue-req";
+import { getPages } from "@/graphql/queries/page-query";
+import { getShopInfo } from "@/graphql/queries/shop-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+export const useAdminValues = () => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["adminValues"],
+    queryFn: getAdminValues,
+  });
+
+  return { data, isError, isLoading };
+};
+
+export const useAdminValueMutation = () => {
+  const queryClient = useQueryClient();
+
+  const { mutateAsync, isError, isPending, isSuccess } = useMutation({
+    mutationKey: ["adminValues"],
+    mutationFn: async (data) => updateAdminValues(data),
+    onSuccess: (data) => {
+      queryClient.setQueryData(["adminValues"], data);
+      queryClient.refetchQueries({ queryKey: ["adminValues"] });
+    },
+  });
+
+  return { mutateAsync, isError, isPending, isSuccess };
+};
+
+export const useShopQuery = () => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["shop"],
+    queryFn: getShopInfo,
+  });
+
+  return { data, isError, isLoading };
+};
+
+export const usePagesQuery = () => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["pages"],
+    queryFn: getPages,
+  });
+
+  return { data, isError, isLoading };
+};

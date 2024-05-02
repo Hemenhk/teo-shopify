@@ -4,7 +4,7 @@ type ProductPrice = {
 
 export default function TheProductPrice({ product }: ProductPrice) {
   return (
-    <div className="text-center lg:text-left border-b pb-8 w-64 mx-auto md:mx-0">
+    <div className="text-center lg:text-left border-b py-8 w-64 mx-auto md:mx-0">
       <p className="text-xl font-medium">
         {product.priceRange.maxVariantPrice.amount}{" "}
         {product.priceRange.maxVariantPrice.currencyCode}

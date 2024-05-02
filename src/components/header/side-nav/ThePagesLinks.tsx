@@ -1,14 +1,18 @@
 "use client";
 
-import { getPages } from "@/graphql/queries/page-query";
-import { useQuery } from "@tanstack/react-query";
+import { usePagesQuery } from "@/hooks/useQueryHooks";
 import Link from "next/link";
 
 export default function ThePagesLinks() {
-  const { data: pagesData } = useQuery({
-    queryKey: ["pages"],
-    queryFn: getPages,
-  });
+  const { data: pagesData, isError, isLoading } = usePagesQuery();
+
+  if (isError) {
+    return <p>Could not load pages</p>;
+  }
+
+  if (isLoading) {
+    return <p>Loading pages...</p>;
+  }
 
   const pages: any[] = pagesData?.data.pages.nodes;
   console.log("all pages", pagesData?.data);

@@ -11,6 +11,8 @@ import QuantitySelector from "@/components/product/QuantitySelector";
 import { addLineItemToCart } from "@/graphql/mutations/add-to-cart";
 import { useToast } from "@/components/ui/use-toast";
 import TheProductVariants from "@/components/product/TheProductVariants";
+import TheAverageRating from "@/components/product/reviews/TheAverageRating";
+import ReviewAccordion from "@/components/product/reviews/TheReviewAccordion";
 
 export default function ProductPage({
   params,
@@ -74,9 +76,12 @@ export default function ProductPage({
   };
 
   return (
-    <main className="flex flex-col lg:flex-row justify-center gap-8 h-full pt-28">
-      <div className="flex  md:w-2/4 h-full">
+    <main className="flex flex-col xl:flex-row items-center xl:items-start justify-center gap-8 h-full pt-28">
+      <div className="flex flex-col items-center gap-20 md:w-2/4 h-full">
         <TheProductImages product={product} />
+        <div className="hidden md:flex">
+          <ReviewAccordion itemHandle={productHandle} />
+        </div>
       </div>
       <div className="flex flex-col text-center md:text-left md:w-[500px] h-full">
         <p className="text-xs uppercase tracking-wide text-gray-500">
@@ -85,6 +90,7 @@ export default function ProductPage({
         <h2 className="text-2xl text-center md:text-left tracking-wide uppercase font-light px-4 md:px-0 py-6">
           {product.title}
         </h2>
+        <TheAverageRating productHandle={productHandle} />
 
         <TheProductPrice product={product} />
         <TheProductVariants
@@ -96,15 +102,18 @@ export default function ProductPage({
         />
         <QuantitySelector count={count} setCount={setCount} />
         <div className="flex justify-center lg:justify-start">
-            <Button
-          onClick={addToCartHandler}
-          className="uppercase tracking-widest font-normal mt-8 w-[330px] md:w-[400px] mx-auto md:mx-0 rounded-none bg-black"
-        >
-          Add to Cart
-        </Button>
+          <Button
+            onClick={addToCartHandler}
+            className="uppercase tracking-widest font-normal mt-8 w-[330px] md:w-[400px] mx-auto md:mx-0 rounded-none bg-black"
+          >
+            Add to Cart
+          </Button>
         </div>
-      
+
         <TheProductDesc product={product} />
+        <div className="flex md:hidden">
+          <ReviewAccordion itemHandle={productHandle} />
+        </div>
       </div>
     </main>
   );

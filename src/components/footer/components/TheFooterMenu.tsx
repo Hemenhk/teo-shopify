@@ -1,19 +1,28 @@
+import { usePagesQuery } from "@/hooks/useQueryHooks";
 import Link from "next/link";
 import React from "react";
 
 export default function TheFooterMenu() {
+  const { data: pagesData, isError, isLoading } = usePagesQuery();
+
+  if (isError) {
+    return <p>Could not load pages</p>;
+  }
+
+  if (isLoading) {
+    return <p>Loading pages...</p>;
+  }
+
+  const pages: any[] = pagesData?.data.pages.nodes;
+
   return (
     <div className="flex flex-col gap-2">
-      <p className="tracking-wide">
-        <Link href={"/terms-policy"}>Terms & Conditions</Link>
-      </p>
-      <p className="tracking-wide">
-        <Link href={"/privacy-policy"}>Privacy Policy</Link>
-      </p>
-      <p className="tracking-wide">
-        <Link href={"/refund-policy"}>Refund Policy</Link>
-      </p>
-      <p className="tracking-wide"><Link href={"/contact"}>Contact Us</Link></p>
+      {pages &&
+        pages.map((page: any) => (
+          <p className="tracking-wide" key={page.id}>
+            <Link href={`/page/${page.handle}`}>{page.title}</Link>
+          </p>
+        ))}
     </div>
   );
 }
