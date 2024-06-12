@@ -8,7 +8,7 @@ export default function TheCartTotalBtn() {
   const { cart } = useCheckout();
   const cost =cart && cart.cost;
 
-  const eur = cost.currencyCode === "EUR" && "€";
+  const eur = cost.totalAmount.currencyCode === "EUR" && "€";
 
   const checkoutUrlHandler = () => {
     router.push("/cart");
@@ -19,7 +19,7 @@ export default function TheCartTotalBtn() {
       className="flex justify-center tracking-widest font-light w-full mx-3 rounded-none bg-black"
     >
       Total: {eur}
-      {cost.amount}
+      {cost.totalAmount.amount}
     </Button>
   );
 }

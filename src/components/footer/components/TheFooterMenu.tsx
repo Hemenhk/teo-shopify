@@ -23,6 +23,9 @@ export default function TheFooterMenu() {
             <Link href={`/page/${page.handle}`}>{page.title}</Link>
           </p>
         ))}
+      <p>
+        <Link href={"/credentials/signin"}>Sign in</Link>
+      </p>
     </div>
   );
 }

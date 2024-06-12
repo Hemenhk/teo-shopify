@@ -20,7 +20,7 @@ export default function TheCartItems() {
               alt={lineItem.merchandise.image.altText || "lineitem image"}
               height={100}
               width={100}
-              className="w-full"
+              className="w-full object-cover"
             />
             <div className="flex flex-col gap-2">
               <p className="uppercase text-xs tracking-wider text-gray-400">

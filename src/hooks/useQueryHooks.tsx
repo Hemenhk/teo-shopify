@@ -1,4 +1,5 @@
 import { getAdminValues, updateAdminValues } from "@/axios/adminValue-req";
+import { fetchReviewStats, fetchReviews } from "@/axios/review-req";
 import { getPages } from "@/graphql/queries/page-query";
 import { getShopInfo } from "@/graphql/queries/shop-query";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -43,4 +44,37 @@ export const usePagesQuery = () => {
   });
 
   return { data, isError, isLoading };
+};
+
+export const useReviewStatsQuery = (productHandle: string) => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["review-stats"],
+    queryFn: () => fetchReviewStats(productHandle),
+  });
+  return { data, isError, isLoading };
+};
+
+export const useReviewQuery = (productHandle: string) => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: () => fetchReviews(productHandle),
+  });
+
+  return { data, isError, isLoading };
+};
+
+
+export const useContactMutation = () => {
+  const queryClient = useQueryClient();
+
+  const { mutateAsync, isError, isPending, isSuccess } = useMutation({
+    mutationKey: ["contact"],
+    mutationFn: async (data) => updateAdminValues(data),
+    onSuccess: (data) => {
+      queryClient.setQueryData(["adminValues"], data);
+      queryClient.refetchQueries({ queryKey: ["adminValues"] });
+    },
+  });
+
+  return { mutateAsync, isError, isPending, isSuccess };
 };

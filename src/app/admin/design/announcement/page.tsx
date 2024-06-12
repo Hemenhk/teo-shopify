@@ -32,9 +32,11 @@ export default function AnnouncementPage() {
 
   const { mutateAsync: adminMutation } = useAdminValueMutation();
 
+  
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await adminMutation(values);
+     await adminMutation(values);
+
     } catch (error) {
       console.log(error);
     }

@@ -2,8 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 
+import { ArrowBigLeft, ArrowLeftCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 type FormFieldType = {
   name: string;
@@ -37,7 +38,7 @@ export default function TheForm({
   formSchema,
   formTitle,
 }: FormType) {
-    
+  const router = useRouter()
   const form = useForm({
     resolver: zodResolver(formSchema),
     values: values,
@@ -63,12 +64,17 @@ export default function TheForm({
       )}
     />
   ));
+  const goBackHandler = () => {
+    router.push("/admin");
+  };
+
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 py-24 w-1/4 mx-auto"
+        className="space-y-8 p-24  mx-auto"
       >
+        <ArrowLeftCircle size={30} cursor="pointer" onClick={goBackHandler} />
         <h2 className="text-xl tracking-wide">{formTitle}</h2>
         {mappedFormFields}
         <Button type="submit" className="w-full">

@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import TheCartTableQuantity from "./TheCartTableQuantity";
+import Link from "next/link";
 
 export default function TheCartTable({ cartItems }: { cartItems: any[] }) {
   const mappedCartItems =
@@ -27,7 +28,11 @@ export default function TheCartTable({ cartItems }: { cartItems: any[] }) {
               <h3></h3>
             </div>
           </TableCell>
-          <TableCell>{item.merchandise.product.title}</TableCell>
+          <TableCell>
+            <Link href={`/product/${item.merchandise.product.handle}`}>
+              {item.merchandise.product.title}
+            </Link>
+          </TableCell>
           <TableCell>
             <TheCartTableQuantity cart={item} />
           </TableCell>

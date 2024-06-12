@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import TheAnnouncement from "@/components/announcement/TheAnnouncement";
 import TheFooter from "@/components/footer/TheFooter";
 import { CheckoutProvider } from "@/context/checkoutContext";
+import NextAuthProvider from "@/context/nextAuth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,17 +25,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className + " flex flex-col min-h-screen"}>
-        <ReactQueryProvider>
-          <CheckoutProvider>
-            <CartProvider>
-              <TheAnnouncement />
-              <TheHeader />
-              <main className="flex-grow">{children}</main>
-              <TheFooter />
-              <Toaster />
-            </CartProvider>
-          </CheckoutProvider>
-        </ReactQueryProvider>
+        <NextAuthProvider>
+          <ReactQueryProvider>
+            <CheckoutProvider>
+              <CartProvider>
+                <TheAnnouncement />
+                <TheHeader />
+                <main className="flex-grow">{children}</main>
+                <TheFooter />
+                <Toaster />
+              </CartProvider>
+            </CheckoutProvider>
+          </ReactQueryProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

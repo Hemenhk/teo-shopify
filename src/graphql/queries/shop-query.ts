@@ -1,8 +1,23 @@
 import { client } from "@/shopify-client";
 
+const videoQuery = `
+{
+  shop {
+    name
+    metafield(namespace: $namespace, key: $key) {
+      id
+      value
+      namespace
+    }
+  }
+}
+
+`;
+
 const productQuery = `
 query ShopQuery {
   shop {
+    
     brand {
       logo {
         id
@@ -69,6 +84,17 @@ query ShopQuery {
   }
 }
 `;
+
+export const getVideoInfo = async (nameSpace: string, key: string) => {
+  try {
+    const res = await client.request(videoQuery, {
+      variables: { nameSpace, key },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getShopInfo = async () => {
   try {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Perks from "@/schema/perkSchema";
+import Contact from "@/schema/contactSchema";
 import { connectToDatabase } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
@@ -8,24 +8,24 @@ export async function POST(req: NextRequest) {
     const reqBody = await req.json();
 
     const { perkImg, perkTitle, perkDescription } = reqBody;
-    const newPerk = new Perks({
+    const newContact = new Contact({
       perkImg,
       perkTitle,
       perkDescription,
     });
-    await newPerk.save();
+    await newContact.save();
 
     if (!req.body) {
       throw new Error("Nothing was passed into the form!");
     }
 
-    console.log("new perk", newPerk);
+    console.log("new perk", newContact);
 
     return NextResponse.json({
       status: 201,
       success: true,
       data: {
-        perks: newPerk,
+        contact: newContact,
       },
     });
   } catch (error: any) {

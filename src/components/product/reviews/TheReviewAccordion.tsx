@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useReviewQuery, useReviewStatsQuery } from "@/hooks/useQueryHooks";
 import Rating from "@mui/material/Rating";
-import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -10,7 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { ReviewProps, fetchReviewStats, fetchReviews } from "@/axios/review-req";
+import { ReviewProps } from "@/axios/review-req";
 import TheReviewForm from "./TheReviewForm";
 
 export default function ReviewAccordion({
@@ -22,16 +22,8 @@ export default function ReviewAccordion({
   const [totalReviews, setTotalReviews] = useState(0);
   const [reviewsPerPage] = useState(5);
 
-  const { data: reviewData } = useQuery({
-    queryKey: ["reviews"],
-    queryFn: () => fetchReviews(itemHandle),
-  });
-
-  const { data: filteredReviewsStats } = useQuery({
-    queryKey: ["reviews-stats"],
-    queryFn: () => fetchReviewStats(itemHandle),
-  });
-  console.log("reviewData", reviewData)
+  const { data: reviewData, isError, isLoading } = useReviewQuery(itemHandle);
+  const { data: filteredReviewsStats } = useReviewStatsQuery(itemHandle);
 
   useEffect(() => {
     if (filteredReviewsStats?.length > 0) {

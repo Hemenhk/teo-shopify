@@ -1,9 +1,8 @@
 "use client";
 
-import { fetchReviewStats } from "@/axios/review-req";
-import Rating from "@mui/material/Rating";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { useReviewStatsQuery } from "@/hooks/useQueryHooks";
+import Rating from "@mui/material/Rating";
 
 export default function TheAverageRating({
   productHandle,
@@ -13,10 +12,11 @@ export default function TheAverageRating({
   const [averageRating, setAverageRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
 
-  const { data: filteredReviewsStats } = useQuery({
-    queryKey: ["reviews-stats"],
-    queryFn: () => fetchReviewStats(productHandle),
-  });
+  const {
+    data: filteredReviewsStats,
+    isError,
+    isLoading,
+  } = useReviewStatsQuery(productHandle);
 
   useEffect(() => {
     if (filteredReviewsStats?.length > 0) {
@@ -25,8 +25,6 @@ export default function TheAverageRating({
       setTotalReviews(stats?.totalReviews);
     }
   }, [filteredReviewsStats]);
-
-  console.log("Filtered review", filteredReviewsStats)
 
   const renderRatingStars = () => {
     if (averageRating > 0) {

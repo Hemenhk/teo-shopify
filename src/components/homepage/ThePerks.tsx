@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { Perk, getPerks } from "@/axios/perks-req";
@@ -34,6 +33,8 @@ export default function ThePerks() {
   if (isError) {
     return <p>No perks!</p>;
   }
+
+  console.log("perks", perkData)
 
   const mappedPerks =
     perkData &&
