@@ -18,10 +18,6 @@ import { useCheckout } from "@/context/checkoutContext";
 export default function TheCart() {
   const { cart } = useCheckout();
 
-  if (!cart) {
-    return <p>No cart</p>;
-  }
-
   console.log("cartData", cart);
 
   return (
@@ -30,7 +26,7 @@ export default function TheCart() {
         <div className="relative">
           <ShoppingBag size={30} />
           <Badge className="bg-red-800 hover:bg-red-800 size-5 rounded-full text-xs flex justify-center items-center absolute top-0 right-0 -mt-1.5 -mr-1.5">
-            {cart && cart?.totalQuantity}
+            {cart && cart?.totalQuantity > 0 ? cart?.totalQuantity : 0}
           </Badge>
         </div>
       </SheetTrigger>
@@ -40,8 +36,10 @@ export default function TheCart() {
             Cart
           </SheetTitle>
         </SheetHeader>
-        <TheCartItems />
-        <SheetFooter className="absolute bottom-16 w-full">
+        <div className="h-4/5">
+          <TheCartItems />
+        </div>
+        <SheetFooter className="relative w-full bg-white pt-5 border-t">
           <TheCartTotalBtn />
         </SheetFooter>
       </SheetContent>

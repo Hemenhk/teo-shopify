@@ -39,6 +39,7 @@ query ShopQuery {
       acceptedCardBrands
       countryCode
       currencyCode
+      supportedDigitalWallets
     }
     privacyPolicy {
       body

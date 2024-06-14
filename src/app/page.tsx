@@ -23,11 +23,11 @@ export default function Home() {
     <main className="flex h-full flex-col items-center justify-between">
       <div>
         <img
-          className="h-[78vh] w-screen brightness-50 object-cover"
+          className="h-[80vh] w-screen brightness-50 object-cover"
           src={homeImage?.url}
           alt={homeImage?.altText || "cover image"}
         />
-        <div className="relative z-50 bottom-36">
+        <div>
           <TheHeroBanner />
         </div>
       </div>

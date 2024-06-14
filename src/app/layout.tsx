@@ -27,15 +27,15 @@ export default function RootLayout({
       <body className={inter.className + " flex flex-col min-h-screen"}>
         <NextAuthProvider>
           <ReactQueryProvider>
-            <CheckoutProvider>
               <CartProvider>
+            <CheckoutProvider>
                 <TheAnnouncement />
                 <TheHeader />
                 <main className="flex-grow">{children}</main>
                 <TheFooter />
                 <Toaster />
-              </CartProvider>
             </CheckoutProvider>
+              </CartProvider>
           </ReactQueryProvider>
         </NextAuthProvider>
       </body>

@@ -12,7 +12,7 @@ export default function TheFeaturedCollection() {
   const products: any[] = collectionData?.data.collection.products.nodes;
 
   return (
-    <div className="flex flex-col items-center justify-center max-w-6xl py-12">
+    <div className="flex flex-col items-center justify-center max-w-6xl py-12 px-5">
       <h2 className="text-2xl uppercase tracking-wider pb-16">
         Featured Collection
       </h2>

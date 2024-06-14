@@ -19,11 +19,11 @@ export default function TheFooterMenu() {
     <div className="flex flex-col gap-2">
       {pages &&
         pages.map((page: any) => (
-          <p className="tracking-wide" key={page.id}>
+          <p className="tracking-wide text-xs" key={page.id}>
             <Link href={`/page/${page.handle}`}>{page.title}</Link>
           </p>
         ))}
-      <p>
+      <p className="tracking-wide text-xs">
         <Link href={"/credentials/signin"}>Sign in</Link>
       </p>
     </div>

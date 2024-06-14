@@ -6,8 +6,20 @@ import TheRemoveCartItem from "./TheRemoveCartItem";
 import TheCartQuantity from "./TheCartQuantity";
 import { useCheckout } from "@/context/checkoutContext";
 
+import image from "../../../../../public/empty-cart.png";
+
 export default function TheCartItems() {
   const { cart } = useCheckout();
+
+  if (cart.lines.nodes.length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center h-3/4">
+        <Image src={image} alt="empty-cart" width={200} height={200} />
+        <p className="text-lg tracking-wide">Your cart is empty!</p>
+      </div>
+    );
+  }
+
   const mappedCartLineItems =
     cart &&
     cart.lines.nodes.map((lineItem: any) => {
@@ -44,5 +56,5 @@ export default function TheCartItems() {
       );
     });
 
-  return <ul className="flex flex-col gap-10 p-6">{mappedCartLineItems}</ul>;
+  return <ul className="flex flex-col gap-10 p-6 overflow-y-scroll max-h-full">{mappedCartLineItems}</ul>;
 }

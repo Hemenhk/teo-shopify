@@ -2,21 +2,23 @@
 
 import { useAdminValues, useShopQuery } from "@/hooks/useQueryHooks";
 import TheFooterMenu from "./components/TheFooterMenu";
+import ThePaymentMethods from "./components/ThePaymentMethods";
 
 export default function TheFooter() {
   const { data: shopData } = useShopQuery();
   const { data: footerData } = useAdminValues();
 
-  const date = new Date()
-  const year = date.getFullYear()
+  const date = new Date();
+  const year = date.getFullYear();
   return (
     <footer
       className="h-80 text-gray-200"
       style={{ backgroundColor: footerData?.footerBackgroundColor }}
     >
-      <div className="flex flex-row pl-5 pt-14 gap-8 h-3/4">
-        <div>
+      <div className="flex flex-row justify-between px-5 pt-14 gap-8 h-3/4">
+        <div className="flex flex-col justify-between">
           <h2>{shopData?.data.shop.name}</h2>
+          <ThePaymentMethods />
         </div>
         <div>
           <TheFooterMenu />

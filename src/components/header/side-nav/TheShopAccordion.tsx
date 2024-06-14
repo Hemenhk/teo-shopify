@@ -1,6 +1,6 @@
 "use client";
 
-import { getShopLinks } from "@/graphql/queries/shop-links"; 
+import { getShopLinks } from "@/graphql/queries/shop-links";
 import { useQuery } from "@tanstack/react-query";
 
 import {
@@ -10,6 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Link from "next/link";
+import { SheetClose } from "@/components/ui/sheet";
 
 export default function TheShopAccordion() {
   const { data: linkData } = useQuery({
@@ -24,13 +25,20 @@ export default function TheShopAccordion() {
     collectionLinks
       .map((link) => (
         <li key={link.id}>
-          <Link href={`/collections/${link.handle}`} className="text-sm uppercase tracking-wider">{link.title}</Link>
+          <SheetClose asChild>
+            <Link
+              href={`/collections/${link.handle}`}
+              className="text-sm uppercase tracking-wider"
+            >
+              {link.title}
+            </Link>
+          </SheetClose>
         </li>
       ))
       .reverse();
 
   return (
-    <Accordion type="single" collapsible className="w-60">
+    <Accordion type="single" collapsible className="w-36 md:w-60">
       <AccordionItem value="item-1">
         <AccordionTrigger className="text-lg font-normal uppercase tracking-wider">
           SHOP

@@ -32,7 +32,7 @@ export default function TheCollection({ products }: { products: any[] }) {
       </Card>
     ));
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-4 px-10">
       {collectionProducts}
     </div>
   );
