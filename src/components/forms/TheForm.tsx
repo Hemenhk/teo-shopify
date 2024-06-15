@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { ArrowBigLeft, ArrowLeftCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 
 type FormFieldType = {
   name: string;
@@ -38,7 +38,7 @@ export default function TheForm({
   formSchema,
   formTitle,
 }: FormType) {
-  const router = useRouter()
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
     values: values,
@@ -74,7 +74,11 @@ export default function TheForm({
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 p-24  mx-auto"
       >
-        <ArrowLeftCircle size={30} cursor="pointer" onClick={goBackHandler} />
+        <BsFillArrowLeftCircleFill
+          size={30}
+          cursor={"pointer"}
+          onClick={goBackHandler}
+        />
         <h2 className="text-xl tracking-wide">{formTitle}</h2>
         {mappedFormFields}
         <Button type="submit" className="w-full">

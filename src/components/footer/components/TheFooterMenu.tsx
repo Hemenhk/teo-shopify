@@ -1,9 +1,11 @@
 import { usePagesQuery } from "@/hooks/useQueryHooks";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
 export default function TheFooterMenu() {
   const { data: pagesData, isError, isLoading } = usePagesQuery();
+  const {data: session} = useSession();
 
   if (isError) {
     return <p>Could not load pages</p>;
@@ -12,6 +14,10 @@ export default function TheFooterMenu() {
   if (isLoading) {
     return <p>Loading pages...</p>;
   }
+
+  const signOutHandler = () => {
+    signOut();
+  };
 
   const pages: any[] = pagesData?.data.pages.nodes;
 
@@ -23,9 +29,15 @@ export default function TheFooterMenu() {
             <Link href={`/page/${page.handle}`}>{page.title}</Link>
           </p>
         ))}
-      <p className="tracking-wide text-xs">
-        <Link href={"/credentials/signin"}>Sign in</Link>
-      </p>
+      {!session ? (
+        <p className="tracking-wide text-xs">
+          <Link href={"/credentials/signin"}>Sign in</Link>
+        </p>
+      ) : (
+        <p className="tracking-wide text-xs cursor-pointer" onClick={signOutHandler}>
+          Sign out
+        </p>
+      )}
     </div>
   );
 }

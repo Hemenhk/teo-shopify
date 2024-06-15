@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeftCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 
 const navlinks = [
   { title: "Home", href: "/" },
@@ -23,7 +23,11 @@ export default function TheDesignPage() {
         <h1 className="uppercase text-xl tracking-wider pl-5 py-5">
           design page
         </h1>
-        <ArrowLeftCircle size={30} cursor="pointer" onClick={goBackHandler} />
+        <BsFillArrowLeftCircleFill
+            size={30}
+            cursor={"pointer"}
+            onClick={goBackHandler}
+          />
       </div>
       <div className="pl-3 pt-5">
         <ul className="flex flex-col gap-2 relative w-full">

@@ -10,21 +10,8 @@ import TheShopAccordion from "./TheShopAccordion";
 import TheSocialMediaIcons from "./TheSocialMediaIcons";
 import { useSession } from "next-auth/react";
 
-// const links = [
-//   { href: "/", handle: "Home" },
-//   { href: "/page/contact", handle: "Contact Us" },
-//   { href: "/page/about-us", handle: "About Us" },
-// ];
-
 export default function TheSideNav() {
-  const session = useSession();
-  // const mappedLinks = links.map((link) => (
-  //   <li className="pb-3 border-b mr-8" key={link.href}>
-  //     <Link href={link.href} className="text-lg uppercase tracking-wider">
-  //       {link.handle}
-  //     </Link>
-  //   </li>
-  // ));
+  const { data: session } = useSession();
 
   return (
     <Sheet>
@@ -33,7 +20,6 @@ export default function TheSideNav() {
       </SheetTrigger>
       <SheetContent side={"left"}>
         <ul className="flex flex-col gap-10 pl-16 relative top-36">
-          {/* {mappedLinks} */}
           <li className="pb-3 border-b mr-8">
             <SheetClose asChild>
               <Link href="/" className="text-lg uppercase tracking-wider">
