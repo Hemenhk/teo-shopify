@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 
 const navlinks = [
   { title: "Home", href: "/" },
-  { title: "Announcement", href: "/admin/announcement" },
-  { title: "Hero Banner", href: "/admin/hero-banner" },
-  { title: "Footer", href: "/admin/footer" },
+  { title: "Announcement", href: "/admin/design/announcement" },
+  { title: "Hero Banner", href: "/admin/design/hero-banner" },
+  { title: "Footer", href: "/admin/design/footer" },
 ];
 export default function TheDesignPage() {
   const router = useRouter();

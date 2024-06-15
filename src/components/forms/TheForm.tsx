@@ -65,7 +65,7 @@ export default function TheForm({
     />
   ));
   const goBackHandler = () => {
-    router.push("/admin");
+    router.push("/admin/design");
   };
 
   return (

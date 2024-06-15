@@ -5,7 +5,7 @@ import TheCartTable from "@/components/cart-page/TheCartTable";
 
 import { getCart } from "@/graphql/queries/cart-checkout";
 import { useQuery } from "@tanstack/react-query";
-import image from "../../../public/man-shopping-supermarket.png";
+import image from "../../../public/empty-cart.png";
 import Image from "next/image";
 
 export default function CartPage() {

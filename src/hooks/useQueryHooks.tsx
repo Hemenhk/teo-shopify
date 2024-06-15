@@ -1,5 +1,9 @@
 import { getAdminValues, updateAdminValues } from "@/axios/adminValue-req";
-import { fetchReviewStats, fetchReviews } from "@/axios/review-req";
+import {
+  fetchAllReviews,
+  fetchReviewStats,
+  fetchReviews,
+} from "@/axios/review-req";
 import { getPages } from "@/graphql/queries/page-query";
 import { getShopInfo } from "@/graphql/queries/shop-query";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -63,6 +67,14 @@ export const useReviewQuery = (productHandle: string) => {
   return { data, isError, isLoading };
 };
 
+export const useAllReviewsQuery = () => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: fetchAllReviews,
+  });
+
+  return { data, isError, isLoading };
+};
 
 export const useContactMutation = () => {
   const queryClient = useQueryClient();

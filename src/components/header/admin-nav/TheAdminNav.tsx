@@ -9,9 +9,9 @@ export default function TheAdminNav() {
   ];
 
   const navlinks = [
-    { title: "Announcement", href: "/admin/announcement" },
-    { title: "Hero Banner", href: "/admin/hero-banner" },
-    { title: "Footer", href: "/admin/footer" },
+    { title: "Announcement", href: "/admin/design/announcement" },
+    { title: "Hero Banner", href: "/admin/design/hero-banner" },
+    { title: "Footer", href: "/admin/design/footer" },
     { title: "Reviews", href: "/admin/reviews" },
   ];
 

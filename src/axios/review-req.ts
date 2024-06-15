@@ -51,8 +51,8 @@ export const fetchReviewStats = async (handle: string) => {
     const hel = response.data.data.reviewStats.filter(
       (review: AverageRatingProps) => review.productHandle === handle
     );
-    console.log("hel review", hel)
-    return hel
+    console.log("hel review", hel);
+    return hel;
   } catch (error) {
     console.log(error);
   }
@@ -64,6 +64,33 @@ export const fetchReviews = async (handle: string) => {
     return response.data.data.reviews.filter(
       (review: ReviewProps) => review.productHandle === handle
     );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchAllReviews = async () => {
+  try {
+    const response = await axios.get<ReviewDataProps>("/api/reviews");
+    return response.data.data.reviews;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateSingleReview = async (id: string, isVerified: boolean) => {
+  try {
+    const res = await axios.patch(`/api/reviews`, { data: { id, isVerified } });
+    console.log("verifying", res);
+    return res;
+  } catch (error) {
+    console.error("Error deleting review:", error);
+  }
+};
+
+export const deleteSingleReview = async (id: string) => {
+  try {
+    await axios.delete("/api/reviews", { data: { id } });
   } catch (error) {
     console.log(error);
   }
