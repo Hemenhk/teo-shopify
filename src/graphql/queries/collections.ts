@@ -13,6 +13,12 @@ query CollectionByHandle($handle: String = "") {
           }
           handle
           id
+          compareAtPriceRange {
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
           priceRange {
             maxVariantPrice {
               amount
@@ -30,8 +36,8 @@ query CollectionByHandle($handle: String = "") {
 export const getCollectionByHandle = async (handle: string) => {
   try {
     const res = await client.request(getCollectionByHandleQuery, {
-        variables: {handle}
-    } );
+      variables: { handle },
+    });
     return res;
   } catch (error) {
     console.log(error);

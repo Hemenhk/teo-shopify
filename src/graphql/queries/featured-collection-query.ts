@@ -1,6 +1,5 @@
 import { client } from "@/shopify-client";
 
-
 const featuredCollection = `
 query FeaturedCollection {
   collection(id: "gid://shopify/Collection/619038310724") {
@@ -14,6 +13,12 @@ query FeaturedCollection {
         }
         handle
         vendor
+         compareAtPriceRange {
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
         priceRange {
           maxVariantPrice {
             amount
@@ -30,11 +35,10 @@ query FeaturedCollection {
 `;
 
 export const getFeaturedCollection = async () => {
-    try {
-      const res = await client.request(featuredCollection);
-      return res;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
+  try {
+    const res = await client.request(featuredCollection);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

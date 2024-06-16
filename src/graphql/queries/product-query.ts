@@ -19,6 +19,12 @@ query ProductByHandle($handle: String = "") {
         transformedSrc(preferredContentType: PNG)
       }
     }
+   compareAtPriceRange {
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+    }
     priceRange {
       maxVariantPrice {
         amount

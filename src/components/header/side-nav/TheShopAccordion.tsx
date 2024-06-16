@@ -40,7 +40,7 @@ export default function TheShopAccordion() {
   return (
     <Accordion type="single" collapsible className="w-36 md:w-60">
       <AccordionItem value="item-1">
-        <AccordionTrigger className="text-lg font-normal uppercase tracking-wider">
+        <AccordionTrigger className="text-lg font-normal uppercase pt-0 pb-4 tracking-wider">
           SHOP
         </AccordionTrigger>
         <AccordionContent>
