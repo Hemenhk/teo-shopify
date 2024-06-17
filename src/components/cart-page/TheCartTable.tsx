@@ -32,6 +32,16 @@ export default function TheCartTable({ cartItems }: { cartItems: any[] }) {
             <Link href={`/product/${item.merchandise.product.handle}`}>
               {item.merchandise.product.title}
             </Link>
+            {item.merchandise?.selectedOptions.map((option: any, idx) => (
+              <div
+                key={idx}
+                className="flex items-center gap-3 text-xs text-gray-500"
+              >
+                <p>
+                  {option.name}: {option.value}
+                </p>
+              </div>
+            ))}
           </TableCell>
           <TableCell>
             <TheCartTableQuantity cart={item} />
