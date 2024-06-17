@@ -1,23 +1,56 @@
 "use client";
 
 import { getCart } from "@/graphql/queries/cart-checkout";
-import { useQuery } from "@tanstack/react-query";
-import { ReactNode, createContext, useContext } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import { ShoppingBag } from "lucide-react";
+import { createCart } from "@/graphql/mutations/create-cart";
 
 const CheckoutContext = createContext<any | undefined>(undefined);
 
 export function CheckoutProvider({ children }: { children: ReactNode }) {
-  const checkoutId = (localStorage.getItem("checkout_id") as string) || "";
+  const [checkoutId, setCheckoutId] = useState(
+    localStorage.getItem("checkout_id") || ""
+  );
+
   const {
     data: checkoutData,
     isError,
     isLoading,
+    refetch,
   } = useQuery({
     queryKey: ["cartItems"],
     queryFn: () => getCart(checkoutId),
+    enabled: !!checkoutId,
   });
+
+  const { mutateAsync: cartCreateMutation } = useMutation({
+    mutationKey: ["cart"],
+    mutationFn: createCart,
+  });
+
+  useEffect(() => {
+    const setCart = async () => {
+      try {
+        if (!checkoutId || checkoutData?.data.cart === null) {
+          const cart = await cartCreateMutation();
+          localStorage.setItem("checkout_id", cart.id);
+          setCheckoutId(cart.id);
+          refetch(); // refetch the cart data after setting the new checkout ID
+        }
+      } catch (error) {
+        console.error("Error creating cart:", error);
+      }
+    };
+    setCart();
+  }, [checkoutId, checkoutData, cartCreateMutation, refetch]);
 
   if (!checkoutId) {
     return <div>No checkout ID found.</div>;
@@ -36,10 +69,12 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
   }
 
   const cart = checkoutData?.data?.cart;
-  console.log("CART", cart)
+  console.log("CART", cart);
 
   return (
-    <CheckoutContext.Provider value={{cart}}>{children}</CheckoutContext.Provider>
+    <CheckoutContext.Provider value={{ cart }}>
+      {children}
+    </CheckoutContext.Provider>
   );
 }
 

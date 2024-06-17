@@ -1,7 +1,8 @@
 "use client";
 
 import { createCart } from "@/graphql/mutations/create-cart";
-import { useMutation } from "@tanstack/react-query";
+import { getCart } from "@/graphql/queries/cart-checkout";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { createContext, useContext, ReactNode, useEffect } from "react";
 
 const CartContext = createContext<any | undefined>(undefined);
@@ -14,27 +15,22 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     mutationFn: createCart,
   });
 
+  const checkoutId = localStorage.getItem("checkout_id");
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Check if checkout_id exists in localStorage
-        const checkoutId = localStorage.getItem("checkout_id");
-        if (checkoutId) {
-          console.log("Using existing checkout_id:", checkoutId);
-          return; // Exit the function if checkout_id exists
+    const initializeCart = async () => {
+      const checkoutId = localStorage.getItem("checkout_id");
+      if (!checkoutId) {
+        try {
+          const cart = await cartCreateMutation();
+          localStorage.setItem("checkout_id", cart.id);
+        } catch (error) {
+          console.error("Error creating cart:", error);
         }
-
-        // If checkout_id doesn't exist, create a new cart
-        const cart = await cartCreateMutation();
-        console.log("Cart data:", cart);
-        localStorage.setItem("checkout_id", cart.id);
-      } catch (error) {
-        console.error("Error:", error);
       }
     };
 
-    fetchData();
-  }, [cartCreateMutation]);
+    initializeCart();
+  }, [cartCreateMutation, checkoutId]);
 
   return <CartContext.Provider value={{}}>{children}</CartContext.Provider>;
 };
