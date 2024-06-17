@@ -32,6 +32,10 @@ query Cart($id: ID!) {
               amount
               currencyCode
             }
+            selectedOptions {
+            name
+            value
+            }
             sku
             unitPrice {
               amount

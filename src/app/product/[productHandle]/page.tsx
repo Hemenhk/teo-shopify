@@ -3,7 +3,7 @@ import TheProductImages from "@/components/product/TheProductImages";
 import TheProductPrice from "@/components/product/TheProductPrice";
 import { getProductByHandle } from "@/graphql/queries/product-query";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import TheProductDesc from "@/components/product/TheProductDesc";
@@ -35,10 +35,24 @@ export default function ProductPage({
     queryKey: ["product"],
     queryFn: () => getProductByHandle(productHandle),
   });
+
+  useEffect(() => {
+    if (productData) {
+      const firstVariantId = productData?.data?.productByHandle?.variants?.nodes?.[0]?.id;
+      if (firstVariantId) {
+        setSelectedVariantId(firstVariantId);
+      }
+    }
+  }, [productData]);
+
   const { mutateAsync: addLineItem } = useMutation({
     mutationKey: ["add"],
-    mutationFn: async () =>
-      await addLineItemToCart(checkoutId, productVariantId, count),
+    mutationFn: async () => {
+      if (!selectedVariantId) {
+        throw new Error("No variant selected");
+      }
+      await addLineItemToCart(checkoutId, selectedVariantId, count);
+    },
     onSuccess: () => {
       queryClient.refetchQueries({ queryKey: ["cartItems"] });
     },
@@ -57,37 +71,34 @@ export default function ProductPage({
   if (!product) {
     return <div>Product not found.</div>;
   }
-  const productVariantId = product.variants.nodes[0].id;
-
-  console.log("product", product);
-  console.log("product", productData.errors);
 
   const addToCartHandler = () => {
     addLineItem();
     toast({
       title: `x${count} - ${product.title}`,
-      description: `${product.variants.nodes[0].title} added to the cart`,
+      description: `${
+        product.variants.nodes.find((variant) => variant.id === selectedVariantId)?.title
+      } added to the cart`,
     });
 
     setTimeout(() => {
       dismiss();
     }, 1500);
-    console.log("okay", addLineItem);
   };
 
   return (
     <main className="flex flex-col xl:flex-row items-center xl:items-start justify-center gap-8 h-full pt-28">
       <div className="flex flex-col items-center gap-20 md:w-2/4 h-full">
         <TheProductImages product={product} />
-        <div className="hidden md:flex">
+        <div className="hidden xl:flex">
           <ReviewAccordion itemHandle={productHandle} />
         </div>
       </div>
-      <div className="flex flex-col text-center md:text-left md:w-[500px] h-full">
+      <div className="flex flex-col text-center xl:text-left md:w-[500px] h-full">
         <p className="text-xs uppercase tracking-wide text-gray-500">
           {product.vendor}
         </p>
-        <h2 className="text-2xl text-center md:text-left tracking-wide uppercase font-light px-4 md:px-0 py-6">
+        <h2 className="text-2xl text-center xl:text-left tracking-wide uppercase font-light px-4 md:px-0 py-6">
           {product.title}
         </h2>
         <TheAverageRating productHandle={productHandle} />
@@ -101,7 +112,7 @@ export default function ProductPage({
           }}
         />
         <QuantitySelector count={count} setCount={setCount} />
-        <div className="flex justify-center lg:justify-start">
+        <div className="flex justify-center xl:justify-start">
           <Button
             onClick={addToCartHandler}
             className="uppercase tracking-widest font-normal mt-8 w-[330px] md:w-[400px] mx-auto md:mx-0 rounded-none bg-black"

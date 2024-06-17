@@ -41,6 +41,15 @@ export default function TheCartItems() {
               <h3 className="uppercase text-sm tracking-wider">
                 {lineItem.merchandise.product.title}
               </h3>
+
+              {lineItem.merchandise?.selectedOptions.map((option: any, idx) => (
+                <div key={idx} className="flex items-center gap-3 text-xs text-gray-500">
+                  <p>
+                    {option.name}: {option.value}
+                  </p>
+                </div>
+              ))}
+
               <p className="text-sm tracking-wider font-medium">
                 {eur}
                 {lineItem.merchandise.price.amount}
@@ -56,5 +65,9 @@ export default function TheCartItems() {
       );
     });
 
-  return <ul className="flex flex-col gap-10 p-6 overflow-y-scroll max-h-full">{mappedCartLineItems}</ul>;
+  return (
+    <ul className="flex flex-col gap-10 p-6 overflow-y-scroll max-h-full">
+      {mappedCartLineItems}
+    </ul>
+  );
 }

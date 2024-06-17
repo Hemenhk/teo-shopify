@@ -54,7 +54,7 @@ export default function TheAverageRating({
   };
 
   return (
-    <div className="flex justify-center md:justify-start items-center gap-2">
+    <div className="flex justify-center xl:justify-start items-center gap-2">
       {renderRatingStars()}
       <p className="text-sm font-light">{totalReviews} reviews</p>
     </div>

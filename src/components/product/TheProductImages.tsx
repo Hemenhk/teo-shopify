@@ -55,7 +55,7 @@ export default function TheProductImages({ product }: ProductImage) {
 
   return (
     <div className="flex flex-col">
-      <Carousel className="w-[300px] md:w-[600px]" setApi={setApi}>
+      <Carousel className="w-[300px] md:w-[400px] lg:w-[500px] xl:w-[600px]" setApi={setApi}>
         <CarouselContent>{mappedImages}</CarouselContent>
         <div className="hidden md:flex">
           <CarouselPrevious />

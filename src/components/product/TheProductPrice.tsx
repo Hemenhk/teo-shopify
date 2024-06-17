@@ -33,7 +33,7 @@ export default function TheProductPrice({ product }: ProductPrice) {
     );
 
   return (
-    <div className="text-center lg:text-left border-b py-8 w-64 mx-auto md:mx-0">
+    <div className="text-center xl:text-left border-b py-8 w-64 mx-auto xl:mx-0">
       {comparePrice}
     </div>
   );

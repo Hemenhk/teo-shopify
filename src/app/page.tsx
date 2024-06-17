@@ -1,7 +1,6 @@
 "use client";
 import TheFeaturedCollection from "@/components/featured-collection/TheFeaturedCollection";
 import TheHeroBanner from "@/components/homepage/TheHeroBanner";
-import ThePerks from "@/components/homepage/ThePerks";
 import { getVideoInfo } from "@/graphql/queries/shop-query";
 import { useShopQuery } from "@/hooks/useQueryHooks";
 import { useQuery } from "@tanstack/react-query";
@@ -20,22 +19,15 @@ export default function Home() {
   console.log("video", videoData);
 
   return (
-    <main className="flex h-full flex-col items-center justify-between">
-      <div>
-        <img
-          className="h-[80vh] w-screen brightness-50 object-cover"
-          src={homeImage?.url}
-          alt={homeImage?.altText || "cover image"}
-        />
-        <div>
-          <TheHeroBanner />
-        </div>
-      </div>
+    <main className="flex h-full flex-col items-center">
+      <img
+        className="h-[80vh] w-screen brightness-50 object-cover"
+        src={homeImage?.url}
+        alt={homeImage?.altText || "cover image"}
+      />
+      <TheHeroBanner />
 
-      <ThePerks />
-      <div className="py-16">
         <TheFeaturedCollection />
-      </div>
     </main>
   );
 }
