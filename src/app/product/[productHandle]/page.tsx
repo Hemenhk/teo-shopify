@@ -13,6 +13,7 @@ import { useToast } from "@/components/ui/use-toast";
 import TheProductVariants from "@/components/product/TheProductVariants";
 import TheAverageRating from "@/components/product/reviews/TheAverageRating";
 import ReviewAccordion from "@/components/product/reviews/TheReviewAccordion";
+import { useCheckout } from "@/context/checkoutContext";
 
 export default function ProductPage({
   params,
@@ -24,7 +25,7 @@ export default function ProductPage({
   const [count, setCount] = useState(1);
   const [selectedVariantId, setSelectedVariantId] = useState("");
 
-  const checkoutId = localStorage.getItem("checkout_id") as string;
+  const { cart } = useCheckout();
   const queryClient = useQueryClient();
 
   const {
@@ -38,7 +39,8 @@ export default function ProductPage({
 
   useEffect(() => {
     if (productData) {
-      const firstVariantId = productData?.data?.productByHandle?.variants?.nodes?.[0]?.id;
+      const firstVariantId =
+        productData?.data?.productByHandle?.variants?.nodes?.[0]?.id;
       if (firstVariantId) {
         setSelectedVariantId(firstVariantId);
       }
@@ -51,7 +53,7 @@ export default function ProductPage({
       if (!selectedVariantId) {
         throw new Error("No variant selected");
       }
-      await addLineItemToCart(checkoutId, selectedVariantId, count);
+      await addLineItemToCart(cart.id, selectedVariantId, count);
     },
     onSuccess: () => {
       queryClient.refetchQueries({ queryKey: ["cartItems"] });
@@ -77,7 +79,9 @@ export default function ProductPage({
     toast({
       title: `x${count} - ${product.title}`,
       description: `${
-        product.variants.nodes.find((variant) => variant.id === selectedVariantId)?.title
+        product.variants.nodes.find(
+          (variant) => variant.id === selectedVariantId
+        )?.title
       } added to the cart`,
     });
 

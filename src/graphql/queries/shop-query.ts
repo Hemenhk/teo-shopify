@@ -14,10 +14,9 @@ const videoQuery = `
 
 `;
 
-const productQuery = `
+const ShopQuery = `
 query ShopQuery {
   shop {
-    
     brand {
       logo {
         id
@@ -77,6 +76,7 @@ query ShopQuery {
       url
     }
     name
+    
     id
     primaryDomain {
       host
@@ -99,7 +99,7 @@ export const getVideoInfo = async (nameSpace: string, key: string) => {
 
 export const getShopInfo = async () => {
   try {
-    const res = await client.request(productQuery);
+    const res = await client.request(ShopQuery);
     return res;
   } catch (error) {
     console.log(error);

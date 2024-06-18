@@ -22,7 +22,7 @@ export const updateLineItem = async (
 ) => {
   try {
     const res = await client.request<{
-      cartLinesUpdate: { cart: Cart; userErrors: UserError[] };
+      cartLinesUpdate: { cart: any; userErrors: any[] };
     }>(updateLineItemMutation, {
       variables: {
         cartId: cartId,

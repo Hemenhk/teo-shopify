@@ -5,6 +5,7 @@ export default function TheAdminNav() {
   const adminNavLinks = [
     { title: "Home", href: "/" },
     { title: "Design", href: "/admin/design" },
+    { title: "Contact", href: "/admin/contact" },
     { title: "Reviews", href: "/admin/reviews" },
   ];
 

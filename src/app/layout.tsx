@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/providers/tanstack-provider";
 import TheHeader from "@/components/header/TheHeader";
-import { CartProvider } from "@/context/cartContext";
 import { Toaster } from "@/components/ui/toaster";
 import TheAnnouncement from "@/components/announcement/TheAnnouncement";
 import TheFooter from "@/components/footer/TheFooter";
@@ -27,15 +26,13 @@ export default function RootLayout({
       <body className={inter.className + " flex flex-col min-h-screen"}>
         <NextAuthProvider>
           <ReactQueryProvider>
-              <CartProvider>
             <CheckoutProvider>
-                <TheAnnouncement />
-                <TheHeader />
-                <main className="flex-grow">{children}</main>
-                <TheFooter />
-                <Toaster />
+              <TheAnnouncement />
+              <TheHeader />
+              <main className="flex-grow">{children}</main>
+              <TheFooter />
+              <Toaster />
             </CheckoutProvider>
-              </CartProvider>
           </ReactQueryProvider>
         </NextAuthProvider>
       </body>

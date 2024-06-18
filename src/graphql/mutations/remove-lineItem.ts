@@ -17,7 +17,7 @@ mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
 export const removeLineItem = async (cartId: string, lineIds: string) => {
   try {
     const res = await client.request<{
-      cartLinesRemove: { cart: Cart; userErrors: UserError[] };
+      cartLinesRemove: { cart: any; userErrors: any[] };
     }>(removeLineItemMutation, {
       variables: {
         cartId: cartId,

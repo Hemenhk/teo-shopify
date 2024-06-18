@@ -1,56 +1,30 @@
 "use client";
 
-import TheForm from "@/components/forms/TheForm";
-import { useMutation } from "@tanstack/react-query";
-import { z } from "zod";
-const formSchema = z.object({
-  name: z.string(),
-  email: z.string(),
-  subject: z.string(),
-  message: z.string(),
-});
-
-const formFields = [
-  {
-    name: "name",
-    type: "text",
-    placeholder: "Name",
-    label: "Name",
-  },
-  {
-    name: "email",
-    type: "text",
-    placeholder: "Email",
-    label: "Email",
-  },
-  {
-    name: "subject",
-    type: "text",
-    placeholder: "Subject",
-    label: "Subject",
-  },
-  {
-    name: "message",
-    type: "textfield",
-    placeholder: "Message",
-    label: "Message",
-  },
-];
+import { useAdminValues } from "@/hooks/useQueryHooks";
 
 export default function ContactPage() {
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await adminMutation(values);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { data: contactData, isError } = useAdminValues();
+  console.log("email", contactData);
+
+  if (isError) {
+    return <>No Email Found</>;
+  }
   return (
-    <TheForm
-      onSubmit={onSubmit}
-      formTitle="Contact Us"
-      formFields={formFields}
-      formSchema={formSchema}
-    />
+    <div className="container flex flex-col items-center justify-center my-24">
+      <h2 className="text-2xl uppercase tracking-wider pb-16">Contact Us</h2>
+      <div className="space-y-5 text-sm tracking-wide">
+        <p >
+          If you have any questions, comments, or concerns, feel free to reach
+          out to us. We would love to hear from you! Please expect all emails
+          below to respond within 24-48 hours during business hours. Please
+          expect a delayed response on weekends.
+        </p>
+        <p>General Inquiries: {contactData?.email}</p>
+        <div>
+          <h3>Address:</h3>
+          <p>{contactData?.address}</p>
+        </div>
+      </div>
+    </div>
   );
 }

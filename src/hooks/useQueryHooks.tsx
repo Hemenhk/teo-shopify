@@ -8,6 +8,18 @@ import { getPages } from "@/graphql/queries/page-query";
 import { getShopInfo } from "@/graphql/queries/shop-query";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
+type AdminValues = {
+  announcementText?: string;
+  announcementColor?: string;
+  heroHeading?: string;
+  heroSubHeading?: string;
+  heroButtonText?: string;
+  heroButtonColor?: string;
+  footerBackgroundColor?: string
+  email?: string;
+  address?: string;
+}
+
 export const useAdminValues = () => {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["adminValues"],
@@ -22,7 +34,7 @@ export const useAdminValueMutation = () => {
 
   const { mutateAsync, isError, isPending, isSuccess } = useMutation({
     mutationKey: ["adminValues"],
-    mutationFn: async (data) => updateAdminValues(data),
+    mutationFn: async (data: AdminValues) => updateAdminValues(data),
     onSuccess: (data) => {
       queryClient.setQueryData(["adminValues"], data);
       queryClient.refetchQueries({ queryKey: ["adminValues"] });

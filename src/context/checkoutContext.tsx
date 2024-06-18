@@ -12,13 +12,19 @@ import {
 
 import { ShoppingBag } from "lucide-react";
 import { createCart } from "@/graphql/mutations/create-cart";
+import TheLoadingScreen from "@/components/homepage/TheLoadingScreen";
 
 const CheckoutContext = createContext<any | undefined>(undefined);
 
 export function CheckoutProvider({ children }: { children: ReactNode }) {
-  const [checkoutId, setCheckoutId] = useState(
-    localStorage.getItem("checkout_id") || ""
-  );
+  const [checkoutId, setCheckoutId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedCheckoutId = localStorage.getItem("checkout_id");
+    if (storedCheckoutId) {
+      setCheckoutId(storedCheckoutId);
+    }
+  }, []);
 
   const {
     data: checkoutData,
@@ -43,21 +49,30 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
           const cart = await cartCreateMutation();
           localStorage.setItem("checkout_id", cart.id);
           setCheckoutId(cart.id);
-          refetch(); // refetch the cart data after setting the new checkout ID
+          setTimeout(() => {
+            refetch();
+          }, 2000);
+          // refetch the cart data after setting the new checkout ID
         }
       } catch (error) {
         console.error("Error creating cart:", error);
       }
     };
-    setCart();
+    if (!checkoutId) {
+      setCart();
+    }
   }, [checkoutId, checkoutData, cartCreateMutation, refetch]);
+
+  if (checkoutId === null) {
+    return <TheLoadingScreen />;
+  }
 
   if (!checkoutId) {
     return <div>No checkout ID found.</div>;
   }
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <TheLoadingScreen />;
   }
 
   if (isError || !checkoutData?.data) {

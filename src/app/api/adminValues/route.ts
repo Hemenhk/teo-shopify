@@ -44,8 +44,16 @@ export async function PATCH(req: NextRequest) {
     const heroSubHeading: string = reqBody.heroSubHeading;
     const heroButtonText: string = reqBody.heroButtonText;
     const heroButtonColor: string = reqBody.heroButtonColor;
+    const email: string = reqBody.email;
+    const address: string = reqBody.address;
 
-    const { _id } = await AdminValues.findOne();
+    const document = await AdminValues.findOne();
+
+    if (!document) {
+      throw new Error("No document found to update");
+    }
+
+    const { _id } = document;
 
     const dashboardValues = await AdminValues.updateOne(
       {
@@ -60,6 +68,8 @@ export async function PATCH(req: NextRequest) {
           heroButtonText: heroButtonText,
           heroButtonColor: heroButtonColor,
           footerBackgroundColor: footerBackgroundColor,
+          email: email,
+          address: address,
         },
       }
     );

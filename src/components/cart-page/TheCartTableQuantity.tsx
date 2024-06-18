@@ -5,12 +5,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import TheCartTableRemove from "./TheCartTableRemove";
+import { useCheckout } from "@/context/checkoutContext";
 
 export default function TheCartTableQuantity({ cart }: { cart: any }) {
   const queryClient = useQueryClient();
   const { quantity, merchandise, id } = cart;
-  const checkoutId = localStorage.getItem("checkout_id") || "";
+  const { cart: checkout } = useCheckout();
 
+  const checkoutId = checkout.id;
   const [count, setCount] = useState(quantity || 1);
 
   const { mutateAsync: updateLineItemMutation } = useMutation({

@@ -29,7 +29,7 @@ export const addLineItemToCart = async (
 ) => {
   try {
     const res = await client.request<{
-      cartLinesAdd: { cart: Cart; userErrors: UserError[] };
+      cartLinesAdd: { cart: any, userErrors: any };
     }>(addLineItemToCartMutation, {
       variables: {
         cartId: cartId,

@@ -25,7 +25,7 @@ mutation cartCreate {
 
 export const createCart = async () => {
     try {
-      const res = await client.request<{ cartCreate: { cart: Cart; userErrors: UserError[] } }>(createCartMutation);
+      const res = await client.request<{ cartCreate: { cart: any; userErrors: any[] } }>(createCartMutation);
       console.log("create cart", res); // This logs the entire response
       return res?.data?.cartCreate.cart; // Return only the cart data
     } catch (error) {

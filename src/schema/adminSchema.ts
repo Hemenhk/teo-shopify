@@ -7,6 +7,10 @@ export interface AdminValuesDocument extends Document {
   heroSubHeading: string;
   heroButtonText: string;
   heroButtonColor: string;
+  footerBackgroundColor: string;
+  email: string;
+  address: string;
+  _id?: string
 }
 
 const adminValues = new mongoose.Schema({
@@ -35,8 +39,13 @@ const adminValues = new mongoose.Schema({
   footerBackgroundColor: {
     type: String,
   },
-  logo: {
+  email: {
     type: String,
+    required: [true, "Must have an email"],
+  },
+  address: {
+    type: String,
+    required: [true, "Must have an address"],
   },
   productId: {},
 });

@@ -17,7 +17,7 @@ export default function TheFooter() {
     >
       <div className="flex flex-row justify-between px-5 pt-14 gap-8 h-3/4">
         <div className="flex flex-col justify-between">
-          <h2>{shopData?.data.shop.name}</h2>
+          <h2 className="uppercase tracking-wider font-light">{shopData?.data.shop.name}</h2>
           <ThePaymentMethods />
         </div>
         <div>

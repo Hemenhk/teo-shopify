@@ -31,7 +31,7 @@ export default function TheSideNav() {
           <li className="pb-3 border-b mr-8">
             <SheetClose asChild>
               <Link
-                href="/page/contact"
+                href="/contact"
                 className="text-lg uppercase tracking-wider"
               >
                 Contact Us

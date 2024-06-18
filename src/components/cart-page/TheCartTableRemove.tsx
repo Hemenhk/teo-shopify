@@ -1,3 +1,4 @@
+import { useCheckout } from "@/context/checkoutContext";
 import { removeLineItem } from "@/graphql/mutations/remove-lineItem";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
@@ -7,7 +8,8 @@ export default function TheCartTableRemove({
 }: {
   lineItemId: string;
 }) {
-  const checkoutId = localStorage.getItem("checkout_id") || "";
+  const { cart } = useCheckout();
+  const checkoutId = cart.id;
   const queryClient = useQueryClient();
 
   const { mutateAsync: removeLineItemMutation } = useMutation({
