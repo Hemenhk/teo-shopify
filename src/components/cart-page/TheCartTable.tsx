@@ -14,7 +14,7 @@ export default function TheCartTable({ cartItems }: { cartItems: any[] }) {
   const mappedCartItems =
     cartItems &&
     cartItems.map((item) => {
-      const eur = item.cost.totalAmount.currencyCode === "EUR" && "€";
+      const sek = item.cost.totalAmount.currencyCode === "SEK" && "KR";
       return (
         <TableRow key={item.id}>
           <TableCell className="font-medium">
@@ -29,7 +29,7 @@ export default function TheCartTable({ cartItems }: { cartItems: any[] }) {
             </div>
           </TableCell>
           <TableCell>
-            <Link href={`/product/${item.merchandise.product.handle}`}>
+            <Link href={`/produkt/${item.merchandise.product.handle}`}>
               {item.merchandise.product.title}
             </Link>
             {item.merchandise?.selectedOptions.map((option: any, idx) => (
@@ -47,8 +47,8 @@ export default function TheCartTable({ cartItems }: { cartItems: any[] }) {
             <TheCartTableQuantity cart={item} />
           </TableCell>
           <TableCell className="text-right">
-            {eur}
-            {item.cost.totalAmount.amount}
+            
+            {item.cost.totalAmount.amount}{sek}
           </TableCell>
         </TableRow>
       );
@@ -58,10 +58,10 @@ export default function TheCartTable({ cartItems }: { cartItems: any[] }) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Product</TableHead>
-          <TableHead>Title</TableHead>
-          <TableHead>Quantity</TableHead>
-          <TableHead className="text-right">Total</TableHead>
+          <TableHead className="w-[100px]">Produkt</TableHead>
+          <TableHead>Titel</TableHead>
+          <TableHead>Kvantitet</TableHead>
+          <TableHead className="text-right">Totalt</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>{mappedCartItems}</TableBody>

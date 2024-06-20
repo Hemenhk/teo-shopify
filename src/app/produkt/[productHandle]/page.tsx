@@ -61,17 +61,17 @@ export default function ProductPage({
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Ladder...</div>;
   }
 
   if (isError) {
-    return <div>Error fetching product.</div>;
+    return <div>Error laddande ac produkt.</div>;
   }
 
   const product = productData?.data?.productByHandle;
 
   if (!product) {
-    return <div>Product not found.</div>;
+    return <div>Ingen produkt hittades.</div>;
   }
 
   const addToCartHandler = () => {
@@ -82,7 +82,7 @@ export default function ProductPage({
         product.variants.nodes.find(
           (variant) => variant.id === selectedVariantId
         )?.title
-      } added to the cart`,
+      } lades till i kundvagnen`,
     });
 
     setTimeout(() => {
@@ -121,7 +121,7 @@ export default function ProductPage({
             onClick={addToCartHandler}
             className="uppercase tracking-widest font-normal mt-8 w-[330px] md:w-[400px] mx-auto md:mx-0 rounded-none bg-black"
           >
-            Add to Cart
+            Lägg i kundvagnen
           </Button>
         </div>
 

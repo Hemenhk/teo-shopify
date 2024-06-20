@@ -36,7 +36,7 @@ export default function TheCartQuantity({ cart }: { cart: any }) {
 
   return (
     <div className="flex flex-col gap-1.5 pt-6">
-      <p className="text-xs">Quantity:</p>
+      <p className="text-xs">Kvantitet:</p>
       <div className="flex items-center justify-between gap-4 border border-[#dbdbdb] rounded px-[20px] py-[6px]  w-[100px]">
         <Minus onClick={minusHandler} size={15} cursor={"pointer"} />
         <p>{quantity}</p>

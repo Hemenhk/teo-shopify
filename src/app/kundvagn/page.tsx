@@ -14,7 +14,7 @@ export default function CartPage() {
     return (
       <div className="flex flex-col justify-center items-center">
         <Image src={image} alt="empty-cart" width={200} height={200} />
-        <p className="text-lg tracking-wide">Your cart is empty!</p>
+        <p className="text-lg tracking-wide">Din kundvagn är tom!</p>
       </div>
     );
   }

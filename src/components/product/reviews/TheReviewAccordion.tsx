@@ -68,7 +68,7 @@ export default function ReviewAccordion({
               <div className="flex">
                 {review?.isVerified ? (
                   <p className="flex items-center bg-black text-white text-xs tracking-wider mr-3 px-3">
-                    Verified
+                    Verifierad
                   </p>
                 ) : (
                   ""
@@ -84,14 +84,14 @@ export default function ReviewAccordion({
         </div>
       ))
     ) : (
-      <p>No reviews available for this product.</p>
+      <p>Inga tillgängliga recensioner för denna produkt.</p>
     );
 
   return (
     <Accordion type="single" collapsible className="w-[450px]">
       <AccordionItem value="Reviews">
         <AccordionTrigger className="uppercase text-sm tracking-widest leading-6 font-light">
-          Reviews ({totalReviews})
+          Recensioner ({totalReviews})
         </AccordionTrigger>
         <AccordionContent className="whitespace-break-spaces">
           <div className="pb-10">
@@ -101,12 +101,12 @@ export default function ReviewAccordion({
           <div className="flex gap-3">
             {currentPage > 1 && (
               <Button onClick={loadPreviousReviewsHandler}>
-                Load previous reviews
+                Ladda tidigare recensioner
               </Button>
             )}
             {reviewData && reviewData?.length > indexOfLastReview && (
               <Button onClick={loadMoreReviewsHandler}>
-                Load more reviews
+                Ladda fler recensioner
               </Button>
             )}
           </div>

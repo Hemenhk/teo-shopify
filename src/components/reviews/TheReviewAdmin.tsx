@@ -41,7 +41,7 @@ export default function TheReviewAdmin() {
           <SelectValue placeholder="Product" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All</SelectItem>
+          <SelectItem value="all">Alla</SelectItem>
           {reviews &&
             reviews?.map((item: ReviewProps) => {
               if (!uniqueProductHandles.has(item?.productHandle)) {
@@ -91,7 +91,7 @@ export default function TheReviewAdmin() {
             <div className="flex">
               {review?.isVerified ? (
                 <p className="flex items-center bg-black text-white text-xs tracking-wider mr-3 px-3">
-                  Verified
+                  Verifierad
                 </p>
               ) : (
                 ""
@@ -118,7 +118,7 @@ export default function TheReviewAdmin() {
           />
         </div>
         <h1 className="tracking-wide uppercase text-base lg:text-xl lg:pl-32">
-          Edit Reviews
+          Redigera Recensioner
         </h1>
         {selectProduct}
       </div>

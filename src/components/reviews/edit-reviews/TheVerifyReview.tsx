@@ -33,7 +33,7 @@ export default function TheVerifyReview({ id, isVerified }: Props) {
   };
   return (
     <Button variant="ghost" onClick={verifyReviewHandler}>
-      {isVerified ? "Unverify" : "Verify"}
+      {isVerified ? "Overifiera" : "Verifiera"}
     </Button>
   );
 }

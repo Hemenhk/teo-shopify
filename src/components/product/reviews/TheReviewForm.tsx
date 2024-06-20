@@ -81,7 +81,7 @@ export default function ReviewForm({
       />
       <TextField
         id="outlined-basic"
-        label="Title"
+        label="Titel"
         variant="outlined"
         name="title"
         value={reviewValues.title}
@@ -90,7 +90,7 @@ export default function ReviewForm({
       />
       <TextField
         id="outlined-basic"
-        label="Review"
+        label="Recension"
         variant="outlined"
         name="review"
         value={reviewValues.review}
@@ -99,7 +99,7 @@ export default function ReviewForm({
       />
       <TextField
         id="outlined-basic"
-        label="Author"
+        label="Författare"
         variant="outlined"
         name="author"
         value={reviewValues.author}
@@ -111,7 +111,7 @@ export default function ReviewForm({
         value={reviewValues.productHandle}
         name="productHandle"
       />
-      <Button type="submit">Add Review</Button>
+      <Button type="submit">Lämna recension</Button>
     </form>
   );
 }

@@ -20,7 +20,7 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
   const [checkoutId, setCheckoutId] = useState<string | null>(null);
 
   useEffect(() => {
-    const storedCheckoutId = localStorage.getItem("checkout_id");
+    const storedCheckoutId = localStorage.getItem("teo_checkout_id");
     if (storedCheckoutId) {
       setCheckoutId(storedCheckoutId);
     }
@@ -47,7 +47,7 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
       try {
         if (!checkoutId || checkoutData?.data.cart === null) {
           const cart = await cartCreateMutation();
-          localStorage.setItem("checkout_id", cart.id);
+          localStorage.setItem("teo_checkout_id", cart.id);
           setCheckoutId(cart.id);
           setTimeout(() => {
             refetch();

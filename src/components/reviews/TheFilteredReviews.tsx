@@ -39,7 +39,7 @@ export default function TheFilteredReviews({ reviews, selectedProduct }: Props) 
             <div className="flex">
               {review?.isVerified ? (
                 <p className="flex items-center bg-black text-white text-xs tracking-wider mr-3 px-3">
-                  Verified
+                  Verifierad
                 </p>
               ) : (
                 ""

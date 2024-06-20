@@ -15,7 +15,7 @@ export default function TheCartItems() {
     return (
       <div className="flex flex-col justify-center items-center h-3/4">
         <Image src={image} alt="empty-cart" width={200} height={200} />
-        <p className="text-lg tracking-wide">Your cart is empty!</p>
+        <p className="text-lg tracking-wide">Din kundvagn är tom!</p>
       </div>
     );
   }
@@ -23,7 +23,7 @@ export default function TheCartItems() {
   const mappedCartLineItems =
     cart &&
     cart.lines.nodes.map((lineItem: any) => {
-      const eur = lineItem.merchandise.price.currencyCode === "EUR" && "€";
+      const sek = lineItem.merchandise.price.currencyCode === "SEK" && "KR";
       return (
         <li key={lineItem.id} className="border-b pb-6">
           <div className="flex flex-row gap-8">
@@ -51,8 +51,8 @@ export default function TheCartItems() {
               ))}
 
               <p className="text-sm tracking-wider font-medium">
-                {eur}
-                {lineItem.merchandise.price.amount}
+               
+                {lineItem.merchandise.price.amount} {sek}
               </p>
               <div className="flex items-end gap-4">
                 <TheCartQuantity cart={lineItem} />

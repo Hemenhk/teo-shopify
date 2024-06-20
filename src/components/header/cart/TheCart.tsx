@@ -33,7 +33,7 @@ export default function TheCart() {
       <SheetContent side={"right"} className="p-0">
         <SheetHeader className="border-b p-6">
           <SheetTitle className="uppercase text-xl font-normal tracking-widest">
-            Cart
+            Kundvagn
           </SheetTitle>
         </SheetHeader>
         <div className="h-4/5">

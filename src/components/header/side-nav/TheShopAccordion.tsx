@@ -27,7 +27,7 @@ export default function TheShopAccordion() {
         <li key={link.id}>
           <SheetClose asChild>
             <Link
-              href={`/collections/${link.handle}`}
+              href={`/kollektioner/${link.handle}`}
               className="text-sm uppercase tracking-wider"
             >
               {link.title}

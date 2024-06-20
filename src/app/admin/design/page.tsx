@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 
 const navlinks = [
-  { title: "Home", href: "/" },
-  { title: "Announcement", href: "/admin/design/announcement" },
-  { title: "Hero Banner", href: "/admin/design/hero-banner" },
-  { title: "Footer", href: "/admin/design/footer" },
+  { title: "Hem", href: "/" },
+  { title: "Annoncering", href: "/admin/design/annoncering" },
+  { title: "Hero Bannern", href: "/admin/design/hero-bannern" },
+  { title: "Footern", href: "/admin/design/footern" },
 ];
 export default function TheDesignPage() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function TheDesignPage() {
     <div className="flex flex-col justify-center">
       <div className="flex items-center justify-between pr-5 border-b">
         <h1 className="uppercase text-xl tracking-wider pl-5 py-5">
-          design page
+          designsida
         </h1>
         <BsFillArrowLeftCircleFill
             size={30}

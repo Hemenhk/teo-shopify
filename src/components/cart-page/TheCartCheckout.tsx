@@ -12,7 +12,7 @@ export default function TheCartCheckout({
   checkoutUrl,
 }: CartCheckout) {
   const router = useRouter();
-  const eur = cartCost?.currencyCode === "EUR" && "€"
+  const sek = cartCost?.currencyCode === "SEK" && "KR"
 
   const redirectHandler = () => {
     router.push(checkoutUrl);
@@ -20,14 +20,14 @@ export default function TheCartCheckout({
   return (
     <div className="flex flex-col items-end pt-10">
       <h3 className="uppercase tracking-wider">
-        Total: {eur}{cartCost?.amount}
+        Totalt: {cartCost?.amount}{sek}
         
       </h3>
       <Button
         onClick={redirectHandler}
         className="w-[200px] mt-4 rounded-none tracking-widest font-light uppercase"
       >
-        Checkout
+        Till Kassan
       </Button>
     </div>
   );

@@ -31,11 +31,11 @@ export default function TheFooterMenu() {
         ))}
       {!session ? (
         <p className="tracking-wide text-xs">
-          <Link href={"/credentials/signin"}>Sign in</Link>
+          <Link href={"/credentials/signin"}>Logga in</Link>
         </p>
       ) : (
         <p className="tracking-wide text-xs cursor-pointer" onClick={signOutHandler}>
-          Sign out
+         Logga ut
         </p>
       )}
     </div>

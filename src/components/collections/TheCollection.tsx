@@ -9,7 +9,7 @@ export default function TheCollection({ products }: { products: any[] }) {
     products.map((item) => (
       <Card key={item.id}>
         <CardContent className="p-0">
-          <Link href={`/product/${item.handle}`}>
+          <Link href={`/produkt/${item.handle}`}>
             <Image
               className="w-full h-full object-cover rounded-t-lg"
               src={item.featuredImage.transformedSrc}

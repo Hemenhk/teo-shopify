@@ -7,44 +7,33 @@ import { z } from "zod";
 import TheForm from "@/components/forms/TheForm";
 
 const formSchema = z.object({
-  announcementColor: z.string(),
-  announcementText: z.string(),
+  footerBackgroundColor: z.string(),
 });
 
 const formFields = [
   {
-    name: "announcementText",
-    type: "text",
-    placeholder: "Announcement Text",
-    label: "Announcement Text",
-  },
-  {
-    name: "announcementColor",
+    name: "footerBackgroundColor",
     type: "color",
-    placeholder: "Announcement Color",
-    label: "Announcement Color",
+    placeholder: "Footerns Backgrundsfärg",
+    label: "Footerns Backgrundsfärg",
   },
 ];
 
-export default function AnnouncementPage() {
+export default function FooterPage() {
   const { data: adminData } = useAdminValues();
-  
 
   const { mutateAsync: adminMutation } = useAdminValueMutation();
 
-  
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-     await adminMutation(values);
-
+      await adminMutation(values);
     } catch (error) {
       console.log(error);
     }
   };
-
   return (
     <TheForm
-      formTitle={"Announcement"}
+      formTitle={"Footern"}
       onSubmit={onSubmit}
       values={adminData}
       formFields={formFields}

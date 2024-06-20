@@ -7,11 +7,11 @@ export default function ThePagesLinks() {
   const { data: pagesData, isError, isLoading } = usePagesQuery();
 
   if (isError) {
-    return <p>Could not load pages</p>;
+    return <p>Kunde inte ladda sidorna.</p>;
   }
 
   if (isLoading) {
-    return <p>Loading pages...</p>;
+    return <p>Laddar sidorna...</p>;
   }
 
   const pages: any[] = pagesData?.data.pages.nodes;

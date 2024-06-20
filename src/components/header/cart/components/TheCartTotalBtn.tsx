@@ -10,9 +10,10 @@ export default function TheCartTotalBtn() {
   const cost = cart && cart.cost;
 
   const eur = cost.totalAmount.currencyCode === "EUR" && "€";
+  const sek = cost.totalAmount.currencyCode === "SEK" && "KR";
 
   const checkoutUrlHandler = () => {
-    router.push("/cart");
+    router.push("/kundvagn");
   };
   return (
     <SheetClose asChild>
@@ -20,8 +21,8 @@ export default function TheCartTotalBtn() {
         onClick={checkoutUrlHandler}
         className="flex justify-center tracking-widest font-light w-full mx-3 rounded-none bg-black"
       >
-        Total: {eur}
-        {cost.totalAmount.amount}
+        Totalt: 
+        {cost.totalAmount.amount}{sek}
       </Button>
     </SheetClose>
   );

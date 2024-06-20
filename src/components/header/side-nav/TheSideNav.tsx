@@ -23,7 +23,7 @@ export default function TheSideNav() {
           <li className="pb-3 border-b mr-8">
             <SheetClose asChild>
               <Link href="/" className="text-lg uppercase tracking-wider">
-                Home
+                Hem
               </Link>
             </SheetClose>
           </li>
@@ -34,7 +34,7 @@ export default function TheSideNav() {
                 href="/contact"
                 className="text-lg uppercase tracking-wider"
               >
-                Contact Us
+               Kontakta Oss
               </Link>
             </SheetClose>
           </li>
@@ -44,7 +44,7 @@ export default function TheSideNav() {
                 href="/page/about-us"
                 className="text-lg uppercase tracking-wider"
               >
-                About Us
+                Om Oss
               </Link>
             </SheetClose>
           </li>
@@ -54,7 +54,7 @@ export default function TheSideNav() {
                 href="/admin"
                 className="text-lg uppercase tracking-wider pb-3 border-b mr-8"
               >
-                Admin Dashboard
+                Administratörsida
               </Link>
             </SheetClose>
           ) : (

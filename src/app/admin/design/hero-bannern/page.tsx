@@ -7,27 +7,35 @@ import { z } from "zod";
 import TheForm from "@/components/forms/TheForm";
 
 const formSchema = z.object({
-  email: z.string(),
-  address: z.string(),
+    heroSubHeading: z.string(),
+    heroHeading: z.string(),
+    heroButtonText: z.string(),
 });
 
 const formFields = [
   {
-    name: "email",
+    name: "heroSubHeading",
     type: "text",
-    placeholder: "Contact Email",
-    label: "Enter Contact Email",
+    placeholder: "Hero Sub-Header",
+    label: "Hero Sub-Header",
   },
   {
-    name: "address",
+    name: "heroHeading",
     type: "text",
-    placeholder: "Address",
-    label: "Enter Address",
+    placeholder: "Hero Header",
+    label: "Hero Header",
+  },
+  {
+    name: "heroButtonText",
+    type: "text",
+    placeholder: "Hero Knapp Text",
+    label: "Hero Knapp Text",
   },
 ];
 
-export default function EmailPage() {
+export default function HeroPage() {
   const { data: adminData } = useAdminValues();
+  
 
   const { mutateAsync: adminMutation } = useAdminValueMutation();
 
@@ -41,7 +49,7 @@ export default function EmailPage() {
 
   return (
     <TheForm
-      formTitle={"Contact"}
+      formTitle={"Hero Bannern"}
       onSubmit={onSubmit}
       values={adminData}
       formFields={formFields}
