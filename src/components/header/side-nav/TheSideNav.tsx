@@ -31,7 +31,7 @@ export default function TheSideNav() {
           <li className="pb-3 border-b mr-8">
             <SheetClose asChild>
               <Link
-                href="/contact"
+                href="/kontakt"
                 className="text-lg uppercase tracking-wider"
               >
                Kontakta Oss
@@ -41,7 +41,7 @@ export default function TheSideNav() {
           <li className="pb-3 border-b mr-8">
             <SheetClose asChild>
               <Link
-                href="/page/about-us"
+                href="/page/om-oss"
                 className="text-lg uppercase tracking-wider"
               >
                 Om Oss

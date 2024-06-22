@@ -4,9 +4,9 @@ const nextConfig = {
     domains: ["cdn.shopify.com", "res.cloudinary.com"],
     formats: ["image/webp"],
   },
-  env: {
-    MONGO_DB: process.env.MONGO_DB,
-  },
+  // env: {
+  //   MONGO_DB: process.env.MONGO_DB,
+  // },
 };
 
 export default nextConfig;

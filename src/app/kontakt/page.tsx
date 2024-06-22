@@ -7,21 +7,21 @@ export default function ContactPage() {
   console.log("email", contactData);
 
   if (isError) {
-    return <>No Email Found</>;
+    return <>Ingen Email Hittades</>;
   }
   return (
     <div className="container flex flex-col items-center justify-center my-24">
       <h2 className="text-2xl uppercase tracking-wider pb-16">Contact Us</h2>
       <div className="space-y-5 text-sm tracking-wide">
-        <p >
-          If you have any questions, comments, or concerns, feel free to reach
-          out to us. We would love to hear from you! Please expect all emails
-          below to respond within 24-48 hours during business hours. Please
-          expect a delayed response on weekends.
+        <p>
+          Om du har några frågor, kommentarer eller funderingar är du välkommen
+          att höra av dig ut till oss. Vi vill gärna höra från dig! Vänligen
+          förvänta dig att alla svar sker inom 24-48
+          timmar under kontorstid. Ett senare svar kan förekomma på helger.
         </p>
-        <p>General Inquiries: {contactData?.email}</p>
+        <p>Generella Frågor: {contactData?.email}</p>
         <div>
-          <h3>Address:</h3>
+          <h3>Adress:</h3>
           <p>{contactData?.address}</p>
         </div>
       </div>
