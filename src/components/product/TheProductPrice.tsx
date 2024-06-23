@@ -15,13 +15,13 @@ export default function TheProductPrice({ product }: ProductPrice) {
     product && product.compareAtPriceRange.maxVariantPrice.amount > 0 ? (
       <div className="flex items-center gap-4">
         <p className="text-red-700 text-2xl font-semibold">
-          {product.priceRange.maxVariantPrice.amount}
-          {product.priceRange.maxVariantPrice.currencyCode === "SEK" && "KR"}
+          {product.priceRange.maxVariantPrice.amount}{" "}
+          {product.priceRange.maxVariantPrice.currencyCode === "SEK" && "kr"}
         </p>
         <p className="line-through text-slate-600">
-          {product.compareAtPriceRange.maxVariantPrice.amount}
+          {product.compareAtPriceRange.maxVariantPrice.amount}{" "}
           {product.compareAtPriceRange.maxVariantPrice.currencyCode === "SEK" &&
-            "KR"}
+            "kr"}
         </p>
         <p className={classes.priceTag}>
           {pricePercentageDifference.toFixed(0)}%
@@ -29,8 +29,8 @@ export default function TheProductPrice({ product }: ProductPrice) {
       </div>
     ) : (
       <p className="text-xl font-medium">
-        {product.priceRange.maxVariantPrice.amount}
-        {product.priceRange.maxVariantPrice.currencyCode === "SEK" && "KR"}
+        {product.priceRange.maxVariantPrice.amount}{" "}
+        {product.priceRange.maxVariantPrice.currencyCode === "SEK" && "kr"}
       </p>
     );
 

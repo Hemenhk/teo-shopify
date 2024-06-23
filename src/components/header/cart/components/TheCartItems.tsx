@@ -23,7 +23,7 @@ export default function TheCartItems() {
   const mappedCartLineItems =
     cart &&
     cart.lines.nodes.map((lineItem: any) => {
-      const sek = lineItem.merchandise.price.currencyCode === "SEK" && "KR";
+      const sek = lineItem.merchandise.price.currencyCode === "SEK" && "kr";
       return (
         <li key={lineItem.id} className="border-b pb-6">
           <div className="flex flex-row gap-8">

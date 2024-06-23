@@ -15,10 +15,14 @@ type AdminValues = {
   heroSubHeading?: string;
   heroButtonText?: string;
   heroButtonColor?: string;
-  footerBackgroundColor?: string
+  footerBackgroundColor?: string;
   email?: string;
   address?: string;
-}
+  featuredCollection?: string;
+  instagram?: string;
+  facebook?: string;
+  tiktok?: string;
+};
 
 export const useAdminValues = () => {
   const { data, isError, isLoading } = useQuery({
@@ -37,7 +41,8 @@ export const useAdminValueMutation = () => {
     mutationFn: async (data: AdminValues) => updateAdminValues(data),
     onSuccess: (data) => {
       queryClient.setQueryData(["adminValues"], data);
-      queryClient.refetchQueries({ queryKey: ["adminValues"] });
+      queryClient.invalidateQueries({ queryKey: ["adminValues"] });
+      queryClient.invalidateQueries({ queryKey: ["collection"] });
     },
   });
 

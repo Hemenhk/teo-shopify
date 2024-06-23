@@ -14,7 +14,7 @@ export default function TheCartTable({ cartItems }: { cartItems: any[] }) {
   const mappedCartItems =
     cartItems &&
     cartItems.map((item) => {
-      const sek = item.cost.totalAmount.currencyCode === "SEK" && "KR";
+      const sek = item.cost.totalAmount.currencyCode === "SEK" && "kr";
       return (
         <TableRow key={item.id}>
           <TableCell className="font-medium">
@@ -48,7 +48,7 @@ export default function TheCartTable({ cartItems }: { cartItems: any[] }) {
           </TableCell>
           <TableCell className="text-right">
             
-            {item.cost.totalAmount.amount}{sek}
+            {item.cost.totalAmount.amount}{" "}{sek}
           </TableCell>
         </TableRow>
       );

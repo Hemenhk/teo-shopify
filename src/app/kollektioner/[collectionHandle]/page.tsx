@@ -17,15 +17,16 @@ export default function CollectionByHandlePage({
 
   const products: any[] =
     collectionData?.data.collectionByHandle.products.nodes;
+  const collection: any[] = collectionData?.data.collectionByHandle.handle;
 
-  //
+  console.log("collectionData", products);
 
   return (
     <div className="flex flex-col items-center justify-center max-w-6xl mx-auto py-24">
       <h2 className="text-2xl uppercase tracking-wider pb-16">
         {collectionData?.data.collectionByHandle.title}
       </h2>
-      <TheCollection products={products} />
+      <TheCollection products={products} collectionHandle={collection} />
     </div>
   );
 }

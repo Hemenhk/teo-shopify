@@ -9,21 +9,39 @@ export default function TheCartTotalBtn() {
   const { cart } = useCheckout();
   const cost = cart && cart.cost;
 
-  const eur = cost.totalAmount.currencyCode === "EUR" && "€";
-  const sek = cost.totalAmount.currencyCode === "SEK" && "KR";
+  const sek = cost.totalAmount.currencyCode === "SEK" && "kr";
+
+  const redirectToCartHandler = () => {
+    router.push("/kundvagn");
+  };
 
   const checkoutUrlHandler = () => {
-    router.push("/kundvagn");
+    router.push(cart?.checkoutUrl);
   };
   return (
     <SheetClose asChild>
-      <Button
-        onClick={checkoutUrlHandler}
-        className="flex justify-center tracking-widest font-light w-full mx-3 rounded-none bg-black"
-      >
-        Totalt: 
-        {cost.totalAmount.amount}{sek}
-      </Button>
+      <div className="flex flex-col w-full mb-5">
+        <div className="flex md:hidden">
+          <Button
+            onClick={checkoutUrlHandler}
+            className="flex justify-center tracking-widest font-light w-full mx-3 rounded-none bg-black"
+          >
+            Totalt:
+            {cost.totalAmount.amount}
+            {sek}
+          </Button>
+        </div>
+        <div className="hidden md:flex">
+          <Button
+            onClick={redirectToCartHandler}
+            className="flex justify-center tracking-widest font-light w-full mx-3 rounded-none bg-black"
+          >
+            Totalt:
+            {cost.totalAmount.amount}{" "}
+            {sek}
+          </Button>
+        </div>
+      </div>
     </SheetClose>
   );
 }

@@ -1,4 +1,4 @@
-import TheProduct from "@/components/product/TheProduct";
+import TheTreatment from "@/components/treatment/TheTreatment";
 import { getProductByHandle } from "@/graphql/queries/product-query";
 import { Metadata, ResolvingMetadata } from "next";
 
@@ -22,14 +22,17 @@ export async function generateMetadata(
     },
   };
 }
-export default function ProductPage({
+
+export default function TreatmentPage({
   params,
 }: {
   params: { productHandle: string };
 }) {
+  const { productHandle } = params;
+
   return (
     <>
-      <TheProduct productHandle={params.productHandle} />
+      <TheTreatment productHandle={productHandle} />
     </>
   );
 }

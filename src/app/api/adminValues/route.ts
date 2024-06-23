@@ -46,6 +46,10 @@ export async function PATCH(req: NextRequest) {
     const heroButtonColor: string = reqBody.heroButtonColor;
     const email: string = reqBody.email;
     const address: string = reqBody.address;
+    const featuredCollection: string = reqBody.featuredCollection;
+    const instagram: string = reqBody.instagram;
+    const facebook: string = reqBody.facebook;
+    const tiktok: string = reqBody.tiktok;
 
     const document = await AdminValues.findOne();
 
@@ -70,6 +74,10 @@ export async function PATCH(req: NextRequest) {
           footerBackgroundColor: footerBackgroundColor,
           email: email,
           address: address,
+          featuredCollection: featuredCollection,
+          instagram: instagram,
+          facebook: facebook,
+          tiktok: tiktok,
         },
       }
     );

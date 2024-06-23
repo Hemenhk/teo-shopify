@@ -3,21 +3,39 @@ import Image from "next/image";
 import Link from "next/link";
 import TheCollectionPrice from "./TheCollectionPrice";
 
-export default function TheCollection({ products }: { products: any[] }) {
+export default function TheCollection({
+  products,
+  collectionHandle,
+}: {
+  products: any[];
+  collectionHandle?: any;
+}) {
   const collectionProducts =
     products &&
     products.map((item) => (
       <Card key={item.id}>
         <CardContent className="p-0">
-          <Link href={`/produkt/${item.handle}`}>
-            <Image
-              className="w-full h-full object-cover rounded-t-lg"
-              src={item.featuredImage.transformedSrc}
-              alt={item.featuredImage.altText || "product image"}
-              width={200}
-              height={200}
-            />
-          </Link>
+          {collectionHandle === "behandlingar" ? (
+            <Link href={`/behandling/${item.handle}`}>
+              <Image
+                className="w-full h-full object-cover rounded-t-lg"
+                src={item.featuredImage.transformedSrc}
+                alt={item.featuredImage.altText || "product image"}
+                width={200}
+                height={200}
+              />
+            </Link>
+          ) : (
+            <Link href={`/produkt/${item.handle}`}>
+              <Image
+                className="w-full h-full object-cover rounded-t-lg"
+                src={item.featuredImage.transformedSrc}
+                alt={item.featuredImage.altText || "product image"}
+                width={200}
+                height={200}
+              />
+            </Link>
+          )}
         </CardContent>
         <CardFooter className="flex flex-col items-start gap-2 mt-4">
           <p className="text-gray-400">{item.vendor}</p>
@@ -25,7 +43,6 @@ export default function TheCollection({ products }: { products: any[] }) {
             {item.title}
           </h2>
           <TheCollectionPrice item={item} />
-        
         </CardFooter>
       </Card>
     ));

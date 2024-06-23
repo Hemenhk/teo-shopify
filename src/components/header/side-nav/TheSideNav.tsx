@@ -48,6 +48,16 @@ export default function TheSideNav() {
               </Link>
             </SheetClose>
           </li>
+          <li className="pb-3 border-b mr-8">
+            <SheetClose asChild>
+              <Link
+                href="/oppet-tider"
+                className="text-lg uppercase tracking-wider"
+              >
+                Öppettider
+              </Link>
+            </SheetClose>
+          </li>
           {session ? (
             <SheetClose asChild>
               <Link
