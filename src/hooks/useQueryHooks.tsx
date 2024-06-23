@@ -18,6 +18,8 @@ type AdminValues = {
   footerBackgroundColor?: string
   email?: string;
   address?: string;
+  featuredCollection?: string;
+
 }
 
 export const useAdminValues = () => {
@@ -37,7 +39,8 @@ export const useAdminValueMutation = () => {
     mutationFn: async (data: AdminValues) => updateAdminValues(data),
     onSuccess: (data) => {
       queryClient.setQueryData(["adminValues"], data);
-      queryClient.refetchQueries({ queryKey: ["adminValues"] });
+      queryClient.invalidateQueries({ queryKey: ["adminValues"] });
+      queryClient.invalidateQueries({ queryKey: ["collection"] });
     },
   });
 

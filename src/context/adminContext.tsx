@@ -11,7 +11,7 @@ export default function AdminLayoutProvider({
 }) {
   const pathname = usePathname();
 
-  const isReviewPage = pathname === "/admin/reviews";
+  const isReviewPage = pathname === "/admin/recensioner";
   return (
     <>
       {isReviewPage ? (

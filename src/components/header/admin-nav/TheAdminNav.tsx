@@ -7,6 +7,7 @@ export default function TheAdminNav() {
     { title: "Design", href: "/admin/design" },
     { title: "Kontakt", href: "/admin/kontakt" },
     { title: "Recensioner", href: "/admin/recensioner" },
+    { title: "Utvald Kollektion", href: "/admin/utvald-kollektion" },
   ];
 
   return (

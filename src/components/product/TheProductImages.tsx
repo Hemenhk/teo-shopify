@@ -55,24 +55,35 @@ export default function TheProductImages({ product }: ProductImage) {
 
   return (
     <div className="flex flex-col">
-      <Carousel className="w-[300px] md:w-[400px] lg:w-[500px] xl:w-[600px]" setApi={setApi}>
+      <Carousel
+        className="w-[300px] md:w-[400px] lg:w-[500px] xl:w-[600px]"
+        setApi={setApi}
+      >
         <CarouselContent>{mappedImages}</CarouselContent>
-        <div className="hidden md:flex">
-          <CarouselPrevious />
-          <CarouselNext />
-        </div>
+        {productImages.length > 1 ? (
+          <div className="hidden md:flex">
+            <CarouselPrevious />
+            <CarouselNext />
+          </div>
+        ) : (
+          ""
+        )}
       </Carousel>
-      <div className="flex gap justify-center pt-5 text-center text-sm text-muted-foreground">
-        {circles.map((circle) => (
-          <div
-            key={circle}
-            className={`size-3 rounded-full mx-1 cursor-pointer ${
-              circle === current ? "bg-gray-700" : "bg-gray-300"
-            }`}
-            onClick={() => api?.scrollTo(circle - 1)}
-          />
-        ))}
-      </div>
+      {productImages.length > 1 ? (
+        <div className="flex gap justify-center pt-5 text-center text-sm text-muted-foreground">
+          {circles.map((circle) => (
+            <div
+              key={circle}
+              className={`size-3 rounded-full mx-1 cursor-pointer ${
+                circle === current ? "bg-gray-700" : "bg-gray-300"
+              }`}
+              onClick={() => api?.scrollTo(circle - 1)}
+            />
+          ))}
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
