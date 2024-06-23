@@ -28,7 +28,7 @@ export default function Home() {
       ) : (
         <main className="flex h-full flex-col items-center">
           <img
-            className="h-[80vh] w-screen brightness-50 object-cover"
+            className="h-[82vh] w-screen brightness-50 object-cover"
             src={homeImage?.url}
             alt={homeImage?.altText || "cover image"}
           />

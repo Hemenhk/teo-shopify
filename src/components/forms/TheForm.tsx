@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 
 type FormFieldType = {
@@ -24,7 +24,7 @@ type FormFieldType = {
 };
 
 type FormType = {
-  values: any;
+  values?: any;
   onSubmit: any;
   formFields: FormFieldType[];
   formSchema: any;
@@ -38,6 +38,7 @@ export default function TheForm({
   formSchema,
   formTitle,
 }: FormType) {
+  const pathname = usePathname();
   const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -65,7 +66,11 @@ export default function TheForm({
     />
   ));
   const goBackHandler = () => {
-    router.push("/admin/design");
+    {
+      pathname === "/admin/social-media" || "/admin/change-password"
+        ? router.push("/admin")
+        : router.push("/admin/design");
+    }
   };
 
   return (
@@ -82,7 +87,7 @@ export default function TheForm({
         <h2 className="text-xl tracking-wide">{formTitle}</h2>
         {mappedFormFields}
         <Button type="submit" className="w-full">
-          Submit
+          Välj
         </Button>
       </form>
     </Form>

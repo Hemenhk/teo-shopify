@@ -8,7 +8,7 @@ export default function TheCollection({
   collectionHandle,
 }: {
   products: any[];
-  collectionHandle: any;
+  collectionHandle?: any;
 }) {
   const collectionProducts =
     products &&

@@ -20,6 +20,16 @@ export const updateAdminValues = async (data: any) => {
   }
 };
 
+export const updatePasswords = async (data: any) => {
+  try {
+    const res = await axios.patch("/api/auth/change-password", data);
+    console.log("updating password values", res);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const postContactForm = async (data: any) => {
   try {
     const res = await axios.post("/api/contactValues", data);

@@ -15,12 +15,14 @@ type AdminValues = {
   heroSubHeading?: string;
   heroButtonText?: string;
   heroButtonColor?: string;
-  footerBackgroundColor?: string
+  footerBackgroundColor?: string;
   email?: string;
   address?: string;
   featuredCollection?: string;
-
-}
+  instagram?: string;
+  facebook?: string;
+  tiktok?: string;
+};
 
 export const useAdminValues = () => {
   const { data, isError, isLoading } = useQuery({

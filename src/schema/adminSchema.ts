@@ -11,6 +11,9 @@ export interface AdminValuesDocument extends Document {
   email: string;
   address: string;
   featuredCollection: string;
+  tiktok: string;
+  instagram: string;
+  facebook: string;
   _id?: string;
 }
 
@@ -49,6 +52,15 @@ const adminValues = new mongoose.Schema({
     required: [true, "Must have an address"],
   },
   featuredCollection: {
+    type: String,
+  },
+  instagram: {
+    type: String,
+  },
+  facebook: {
+    type: String,
+  },
+  tiktok: {
     type: String,
   },
   productId: {},

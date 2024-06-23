@@ -8,6 +8,8 @@ export default function TheAdminNav() {
     { title: "Kontakt", href: "/admin/kontakt" },
     { title: "Recensioner", href: "/admin/recensioner" },
     { title: "Utvald Kollektion", href: "/admin/utvald-kollektion" },
+    { title: "Social Media", href: "/admin/social-media" },
+    { title: "Ändra Lösenord", href: "/admin/change-password" },
   ];
 
   return (
